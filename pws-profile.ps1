@@ -1,4 +1,4 @@
-﻿∩╗┐Import-Module Terminal-Icons
+﻿Import-Module Terminal-Icons
 Set-PSReadLineOption -PredictionViewStyle ListView
 
 # Powerline
@@ -14,8 +14,11 @@ function global:prompt {
   $time = Get-Date -Format "HH:mm"
 
   # Definir s├¡mbolos con fallbacks
-  $arrow = if ($Host.UI.SupportsVirtualTerminal) { "Γ¥»" } else { ">" }
-  $gitSymbol = if ($Host.UI.SupportsVirtualTerminal) { "εéá" } else { "G:" }
+  $arrow = if ($Host.UI.SupportsVirtualTerminal) {
+      "`u{276F}" } else { ">" }
+
+  $gitSymbol = if ($Host.UI.SupportsVirtualTerminal) {
+      "`u{E0A0}" } else { "G:" }
 
   # Colores usando las variables de PowerShell
   $cwdColor = $PSStyle.Foreground.FromRgb(229,192,123)
@@ -293,69 +296,67 @@ function zip {
 # Custom ls
 function la {
   Get-ChildItem | ForEach-Object {
-    $icon = ""
+    $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{e5ff}" } # folder icon
     $color_code = $PSStyle.Foreground.FromRgb(210,210,210)
 
     if ($_.PSIsContainer) {
-      $icon = "εù┐"  # folder icon
+      $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{e5ff}" } # folder icon
       $color_code = $PSStyle.Foreground.FromRgb(210,210,210)
-      # $color_code = $PSStyle.Foreground.FromRgb(0, 178, 178)
     } else {
       switch -regex ($_.Extension.ToLower()) {
-        "\.(ps1|bat|sh)$" {
-          $icon = "ε₧ò";
-          $color = "Green"
-          $color_code = $PSStyle.Foreground.FromRgb(77, 201, 77)
-        }    # shell/script
-
-        # "\.(txt)$" {
-        #   $icon = "∩à£";
-        #   $color_code = $PSStyle.Foreground.FromRgb(200,200,200)
-        #   # $color_code = $PSStyle.Foreground.FromRgb(255, 255, 255)
-        # }    # text
-
-        "\.(md)$" {
-          $icon = "≤░ìö";
-          $color_code = $PSStyle.Foreground.FromRgb(255, 255, 255)
-        } # markdown
-
-        "\.(png|jpg|jpeg)$" {
-          $icon = "εëä";
+        "\.(png|jpg|jpeg|webp|gif)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{f03e}" }
           $color_code = $PSStyle.Foreground.FromRgb(246, 95, 156)
-          $color = "Magenta"
         }  # images
-
-        "\.(zip|rar|7z)$" {
-          $icon = "∩ÉÉ";
-          $color_code = $PSStyle.Foreground.FromRgb(239, 234, 95)
-        }   # archive
-
-        "\.(cpp|h)$" {
-          $icon = "εÿ¥";
-          $color_code = $PSStyle.Foreground.FromRgb(66, 197, 233)
-        } # code files
-
-        "\.(rs|mod|toml)$" {
-          $icon = "ε₧¿";
-          $color_code = $PSStyle.Foreground.FromRgb(244, 80, 111)
-        } # code files
-
-        "\.(cs|csproj|sln)$" {
-          $icon = "ε₧▓"
-          $color_code = $PSStyle.Foreground.FromRgb(144, 131, 242)
-        } # code files
-
+        "\.(mkv|mp4|mov|avi|webm|flv)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{f03d}" }
+          $color_code = $PSStyle.Foreground.FromRgb(147,145, 195)
+        }  # videos
         "\.(ogg|wav|mp3|m4a|flac|aac|aiff)$" {
-          $icon = "∩Çü"
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{f001}" }
           $color_code = $PSStyle.Foreground.FromRgb(178, 168, 255)
         } # Audio files
+        "\.(zip|rar|7z)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{f410}" }
+          $color_code = $PSStyle.Foreground.FromRgb(239, 234, 95)
+        }   # zips
 
-        "\.(go)$" {
-          $icon = "εÿº";
+
+        "\.(ps1|bat|sh)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{e795}" }
+          $color_code = $PSStyle.Foreground.FromRgb(77, 201, 77)
+        }    # shell/script
+        "\.(md)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{039B}" }
+          $color_code = $PSStyle.Foreground.FromRgb(255, 255, 255)
+        } # markdown
+        "\.(cpp|h)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{e61d}" }
+          $color_code = $PSStyle.Foreground.FromRgb(66, 197, 233)
+        } # cpp
+        "\.(rs|toml)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{e7a8}" }
+          $color_code = $PSStyle.Foreground.FromRgb(244, 80, 111)
+        } # rust
+        "\.(cs|csproj|sln)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{e7b2}" }
+          $color_code = $PSStyle.Foreground.FromRgb(144, 131, 242)
+        } # csharp
+        "\.(go|mod|sum)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{e627}" }
           $color_code = $PSStyle.Foreground.FromRgb(110, 191, 252)
-        } # code files
+        } # golang
+        "\.(gitignore|gitattributes)$" {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{e702}" }
+          $color_code = $PSStyle.Foreground.FromRgb(244, 80, 111)
+        } # git
+        "\.(js|jsx|json)$"{
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{ed0d}" }
+          $color_code = $PSStyle.Foreground.FromRgb(229, 192, 123)
+        }# javascript
 
-        default { $icon = "∩â╢"; $color_code = $PSStyle.Foreground.FromRgb(163,163,163)}# generic file
+        default {
+          $icon = if ($Host.UI.SupportsVirtualTerminal) { "`u{f0f6}" }; $color_code = $PSStyle.Foreground.FromRgb(163,163,163)}# generic file
       }
     }
     Write-Host "$color_code$icon  $($_.Name)"
