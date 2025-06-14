@@ -1,96 +1,45 @@
-#(@(& 'C:/Users/carlo/AppData/Local/Programs/oh-my-posh/bin/oh-my-posh.exe' init pwsh --config='C:\Users\carlo\AppData\Local\Programs\oh-my-posh\themes\dracula.omp.json' --print) -join "`n") | Invoke-Expression
-Import-Module Terminal-Icons
+﻿∩╗┐Import-Module Terminal-Icons
 Set-PSReadLineOption -PredictionViewStyle ListView
 
-
 # Powerline
-function prompt {
-  $cwd = Split-Path (Get-Location) -Leaf
-  $time = Get-Date -Format "HH:mm"
-  $arrow = "`e[38;5;10mΓ¥»`e[0m"
+function global:prompt {
+  # Obtener ruta actual con manejo de home directory
+  $cwd = $(Get-Location).Path
+  if ($cwd -like "$env:USERPROFILE*") {
+      $cwd = "~" + $cwd.Substring($env:USERPROFILE.Length)
+  }
+  $leaf = Split-Path $cwd -Leaf
 
+  # Formatear tiempo
+  $time = Get-Date -Format "HH:mm"
+
+  # Definir s├¡mbolos con fallbacks
+  $arrow = if ($Host.UI.SupportsVirtualTerminal) { "Γ¥»" } else { ">" }
+  $gitSymbol = if ($Host.UI.SupportsVirtualTerminal) { "εéá" } else { "G:" }
+
+  # Colores usando las variables de PowerShell
+  $cwdColor = $PSStyle.Foreground.FromRgb(229,192,123)
+  $timeColor = $PSStyle.Foreground.FromRgb(152,195,121)
+  $gitColor = $PSStyle.Foreground.FromRgb(204,111,130)
+  $resetColor = "$([char]27)[0m"
+
+  # Informaci├│n de Git
   $gitBranch = ""
   if (Get-Command git -ErrorAction SilentlyContinue) {
     try {
-      $branchName = git rev-parse --abbrev-ref HEAD 2>$null
-      if ($branchName) {
-          $gitBranch = "`e[38;5;13mεéá $branchName`e[0m"
+      $branch = git rev-parse --abbrev-ref HEAD 2>$null
+      if ($branch) {
+        $gitBranch = " $gitColor$gitSymbol $branch$resetColor"
       }
     } catch {}
   }
 
-  Write-Host "`e[38;5;11m$cwd`e[38;5;10m at $time`e[0m $gitBranch" -NoNewline
-  return " $arrow "
-}
+  # Construir prompt
+  $promptString = "${cwdColor}$leaf${timeColor} at ${time}${resetColor}${gitBranch}"
+  $promptString += " $timeColor$arrow$resetColor "
 
-
-
-# custom ls
-function lsi {
-    Get-ChildItem | ForEach-Object {
-        $icon = ""
-        $color_code = $PSStyle.Foreground.FromRgb(200,200,200)
-
-        if ($_.PSIsContainer) {
-            $icon = "εù┐"  # folder icon
-            $color_code = $PSStyle.Foreground.FromRgb(200,200,200)
-            # $color_code = $PSStyle.Foreground.FromRgb(0, 178, 178)
-        } else {
-            switch -regex ($_.Extension.ToLower()) {
-                "\.(ps1|bat|sh)$" {
-                  $icon = "ε₧ò";
-                  $color = "Green"
-                  $color_code = $PSStyle.Foreground.FromRgb(77, 201, 77)
-                }    # shell/script
-
-                "\.(txt)$" {
-                  $icon = "∩à£";
-                  $color_code = $PSStyle.Foreground.FromRgb(255, 255, 255)
-                }    # text
-
-                "\.(md)$" {
-                  $icon = "≤░ìö";
-                  $color_code = $PSStyle.Foreground.FromRgb(255, 255, 255)
-                } # markdown
-
-                "\.(png|jpg|jpeg)$" {
-                  $icon = "εëä";
-                  $color_code = $PSStyle.Foreground.FromRgb(246, 95, 156)
-                  $color = "Magenta"
-                }  # images
-
-                "\.(zip|rar|7z)$" {
-                  $icon = "∩ÉÉ";
-                  $color_code = $PSStyle.Foreground.FromRgb(239, 234, 95)
-                }   # archive
-
-                "\.(cpp|h)$" {
-                  $icon = "εÿ¥";
-                  $color_code = $PSStyle.Foreground.FromRgb(66, 197, 233)
-                } # code files
-
-                "\.(rs|mod)$" {
-                  $icon = "ε₧¿";
-                  $color_code = $PSStyle.Foreground.FromRgb(244, 80, 111)
-                } # code files
-
-                "\.(cs|csproj|sln)$" {
-                  $icon = "ε₧▓"
-                  $color_code = $PSStyle.Foreground.FromRgb(173, 108, 217)
-                } # code files
-
-                "\.(go)$" {
-                  $icon = "εÿº";
-                  $color_code = $PSStyle.Foreground.FromRgb(110, 191, 252)
-                } # code files
-
-                default { $icon = "∩â╢"; $color_code = $PSStyle.Foreground.FromRgb(183,183,183)}                # generic file
-            }
-        }
-
-        Write-Host "$color_code$icon  $($_.Name)"
-        # Write-Host "$colorCode$icon  $(<span class="math-inline">\_\.Name\)</span>($PSStyle.Reset)"
-    }
+  # Devolver el prompt
+  $promptString
 }
 
 
@@ -99,19 +48,7 @@ function lsi {
 
 #Alias
 
-
 # Cmake
-function cmk{
-  param(
-    [string]$dir_file
-  )
-  if($dir_file -eq ""){
-    $dir_file = (Get-Location).Path + "\CMakeLists.txt"
-  }
-  # echo($dir_file)
-  cmake $dir_file
-}
-
 function cmm {
   $dir_build= (Get-Location).Path + "\build\"
   $exist_dir = Test-PathExists $dir_build
@@ -121,37 +58,26 @@ function cmm {
   mkdir $dir_build
   cd build/
 
-  $dir_build= (Get-Location).Path + "\..\CMakeLists.txt"
-  cmk $dir_build
-
+  cmake .. -G "Ninja"
   cmake --build .
+
   cd ../
 }
 
 function Test-PathExists {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory=$true, Position=0)]
-        [string]$Path # El par├ímetro que recibir├í la ruta a verificar
-    )
+  [CmdletBinding()]
+  param (
+    [Parameter(Mandatory=$true, Position=0)]
+    [string]$Path # El par├ímetro que recibir├í la ruta a verificar
+  )
 
-    if (Test-Path -Path $Path) { return $true}
-    else { return $false }
+  if (Test-Path -Path $Path) { return $true}
+  else { return $false }
 }
 
 
 #Touch
-function to {
-  param(
-    [Parameter(Mandatory=$true)] # Makes the parameter required
-    [string]$dir_file,
-    [string]$data
-  )
-
-  # echo($data)
-  # echo($final_dir)
-  touch $dir_file $data
-}
+Set-Alias to touch
 
 function touch {
   param(
@@ -168,56 +94,65 @@ function touch {
 # Git
 function gts { git status }
 function gta { git add .}
+function gtp { git push }
+function gtpl { git pull }
+
 function gtm {
   param([string]$comment)
+  if($comment -eq ""){ $comment = "f: menor update" }
   git commit -m $comment
 }
 
 function gtl {
-  [Parameter(Mandatory=$true)] # Makes the parameter required
   param([int]$index)
   if($index -eq 0){ git log }
   else { git log -$index }
 }
 
+function fcm {
+  param([string]$comment)
+  if($comment -eq ""){ $comment = "f: menor update" }
+  gta && gtm $comment && gtp
+}
 
 
 # Nvim
 Set-Alias vi nvim
 
-# Paths
-function nvc { cd $env:LOCALAPPDATA\nvim }
-function gg { cd D:/Github/ }
-function hh { cd E:/carlo/ }
 
 # SPOT
 function spd {
-    param (
-        [string]$data
-    )
-    python.exe -m spotdl download $data
+  param (
+    [Parameter(Mandatory=$true)] # Makes the parameter required
+    [string]$spotifyURL
+  )
+  python.exe -m spotdl download $spotifyURL
 }
 
 #CPP
 function cr {
-    param (
-        [string]$path,
-        [string]$name
-    )
-    g++.exe -o $path $name
+  param (
+    [string]$path,
+    [string]$name
+  )
+  if($path -eq ""){ $path = Get-Location }
+  if($name -eq ""){ $name = "DebugApp.exe" }
+  g++.exe -o $path $name
 }
 
 function crb {
-    param (
-        [string]$OutputName = "program",
-        [string]$ProjectRoot = "."
-    )
-    g++.exe -o $OutputName $ProjectRoot\src\main.cpp
+  param (
+    [string]$OutputName = "program",
+    [string]$ProjectRoot = "."
+  )
+  if($ProjectRoot -eq ""){ $ProjectRoot = (Get-Location).Path + "\src\main.cpp" }
+  if($OutputName -eq ""){ $OutputName = "DebugApp.exe" }
+  g++.exe -o $OutputName $ProjectRoot\src\main.cpp
 }
 
 
 # Linux
-function lnx { wsl.exe }
+Set-Alias lnx  wsl.exe
 function lnh { wsl.exe --cd "~" }
 
 
@@ -225,61 +160,59 @@ function lnh { wsl.exe --cd "~" }
 
 ## Go Run
 function gor {
-    param (
-        [string]$path
-    )
-    go.exe run $path
+  param (
+    [string]$path
+  )
+  if($ProjectRoot -eq ""){ $ProjectRoot = (Get-Location).Path + "\main.go" }
+  go.exe run $path
 }
 
 
 
 # Eza
 function tree {
-    param (
-        [string]$path
-    )
-    if($path -eq ""){ $path="."}
-    eza -T $path
+  param (
+    [string]$path
+  )
+  if($path -eq ""){ $path= Get-Location }
+  eza -T $path
 }
-function tre{
-  param ([string]$path)
-  tree $path
-}
-
+Set-Alias tre tree
 
 # Surreal
-function sr { surreal.exe }
+Set-Alias sr surreal.exe
 
 
 ## Typst
 function tpr {
-    param (
-        [string]$path
-    )
-    typst.exe compile $path
+  param (
+    [string]$path
+  )
+  typst.exe compile $path
 }
 
 function tpv {
-    param (
-        [string]$path
-    )
-    typst.exe watch $path
+  param (
+    [string]$path
+  )
+  typst.exe watch $path
 }
 
 
 ## Dotnet
 
-function dnrr { dotnet build -c Release }
+function dnbr { dotnet build -c Release }
 function dnb { dotnet build }
 function dnr { dotnet run }
+function dnrr { dotnet run --configuration Release }
 
 
 ## PHP
 function plh {
-    param (
-        [int]$port
-    )
-    php -S localhost:$port
+  param (
+    [int]$port
+  )
+  php -S localhost:$port
 }
 
 #Apache Server StoP
@@ -292,15 +225,25 @@ function asrs { httpd -k restart }
 
 
 ## System
-function cls { clear }
-function ee { exit }
 function dd { shutdown /s /t 0 }
 function .. { Set-Location .. }
-function ex { explorer . }
-function mk {
-    param([string]$folderName)
-    mkdir $folderName
+function ee { exit }
+function ex {
+  param([string]$Path)
+  if($Path -eq ""){$Path = Get-Location}
+  explorer $Path
 }
+Set-Alias cls clear
+Set-Alias mk mkdir
+
+# Paths
+function nvc { cd $env:LOCALAPPDATA\nvim }
+function alc { cd $env:APPDATA\alacritty}
+function ldd { cd $env:LOCALAPPDATA\}
+function gg { cd D:/Github/ }
+function hh { cd E:/carlo/ }
+
+
 
 function cbf{
   param (
@@ -320,32 +263,105 @@ function unzip {
 
 
 function zip {
-    param (
-        [Parameter(Mandatory = $true)]
-        [string]$Oripath,
+  param (
+    [Parameter(Mandatory = $true)]
+    [string]$Oripath,
 
-        [Parameter(Mandatory = $true)]
-        [string]$DesPath
-    )
+    [Parameter(Mandatory = $true)]
+    [string]$DesPath
+  )
 
-    if ($Oripath -eq "./*" -or $Oripath -eq "*") {
-        $Oripath = (Get-Location).Path + "\\*"
-    }
+  if ($Oripath -eq "./*" -or $Oripath -eq "*") {
+    $Oripath = (Get-Location).Path + "\\*"
+  }
 
-    if ($DesPath -eq "./../" -or $DesPath -eq "../") {
-       $oldPath = Get-Location
-       Set-Location "../"
-       $DesPath = (Get-Location).Path + "\fzip.zip"
-       Set-Location $oldPath
-       $oldPath = Get-Location
-    }
-    if ($DesPath -eq "." -or $Despath -eq "./") {
-       $DesPath = (Get-Location).Path + "\fzip.zip"
-    }
+  if ($DesPath -eq "./../" -or $DesPath -eq "../") {
+    $oldPath = Get-Location
+    Set-Location "../"
+    $DesPath = (Get-Location).Path + "\fzip.zip"
+    Set-Location $oldPath
+    $oldPath = Get-Location
+  }
+  if ($DesPath -eq "." -or $Despath -eq "./") {
+    $DesPath = (Get-Location).Path + "\fzip.zip"
+  }
 
-    echo("Despath")
-    echo($DesPath)
-    Compress-Archive -Path $Oripath -DestinationPath $DesPath -Force
+  Compress-Archive -Path $Oripath -DestinationPath $DesPath -Force
 }
+
+
+# Custom ls
+function la {
+  Get-ChildItem | ForEach-Object {
+    $icon = ""
+    $color_code = $PSStyle.Foreground.FromRgb(210,210,210)
+
+    if ($_.PSIsContainer) {
+      $icon = "εù┐"  # folder icon
+      $color_code = $PSStyle.Foreground.FromRgb(210,210,210)
+      # $color_code = $PSStyle.Foreground.FromRgb(0, 178, 178)
+    } else {
+      switch -regex ($_.Extension.ToLower()) {
+        "\.(ps1|bat|sh)$" {
+          $icon = "ε₧ò";
+          $color = "Green"
+          $color_code = $PSStyle.Foreground.FromRgb(77, 201, 77)
+        }    # shell/script
+
+        # "\.(txt)$" {
+        #   $icon = "∩à£";
+        #   $color_code = $PSStyle.Foreground.FromRgb(200,200,200)
+        #   # $color_code = $PSStyle.Foreground.FromRgb(255, 255, 255)
+        # }    # text
+
+        "\.(md)$" {
+          $icon = "≤░ìö";
+          $color_code = $PSStyle.Foreground.FromRgb(255, 255, 255)
+        } # markdown
+
+        "\.(png|jpg|jpeg)$" {
+          $icon = "εëä";
+          $color_code = $PSStyle.Foreground.FromRgb(246, 95, 156)
+          $color = "Magenta"
+        }  # images
+
+        "\.(zip|rar|7z)$" {
+          $icon = "∩ÉÉ";
+          $color_code = $PSStyle.Foreground.FromRgb(239, 234, 95)
+        }   # archive
+
+        "\.(cpp|h)$" {
+          $icon = "εÿ¥";
+          $color_code = $PSStyle.Foreground.FromRgb(66, 197, 233)
+        } # code files
+
+        "\.(rs|mod|toml)$" {
+          $icon = "ε₧¿";
+          $color_code = $PSStyle.Foreground.FromRgb(244, 80, 111)
+        } # code files
+
+        "\.(cs|csproj|sln)$" {
+          $icon = "ε₧▓"
+          $color_code = $PSStyle.Foreground.FromRgb(144, 131, 242)
+        } # code files
+
+        "\.(ogg|wav|mp3|m4a|flac|aac|aiff)$" {
+          $icon = "∩Çü"
+          $color_code = $PSStyle.Foreground.FromRgb(178, 168, 255)
+        } # Audio files
+
+        "\.(go)$" {
+          $icon = "εÿº";
+          $color_code = $PSStyle.Foreground.FromRgb(110, 191, 252)
+        } # code files
+
+        default { $icon = "∩â╢"; $color_code = $PSStyle.Foreground.FromRgb(163,163,163)}# generic file
+      }
+    }
+    Write-Host "$color_code$icon  $($_.Name)"
+  }
+}
+
+
 
 clear
