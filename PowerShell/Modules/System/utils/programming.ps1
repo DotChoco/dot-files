@@ -1,4 +1,5 @@
-# Cmake
+#CPP
+## Cmake
 function cmm {
   $dir_build= (Get-Location).Path + "\build\"
   $exist_dir = Test-PathExists $dir_build
@@ -14,45 +15,7 @@ function cmm {
   cd ../
 }
 
-
-
-# Git
-function gts { git status }
-function gta { git add .} # Git add All
-function gtp { git push }
-function gtpl { git pull }
-
-#Git Commit
-function gtm {
-  param([string]$comment)
-  if($comment -eq ""){ $comment = "f: menor update" }
-  git commit -m $comment
-}
-
-#Git Log
-function gtl {
-  param([int]$index)
-  if($index -eq 0){ git log }
-  else { git log -$index }
-}
-
-#Fast Commit
-function fcm {
-  param([string]$comment)
-  gta && gtm $comment && gtp
-}
-
-
-# SPOT
-function spd {
-  param (
-    [Parameter(Mandatory=$true)] # Makes the parameter required
-    [string]$spotifyURL
-  )
-  python.exe -m spotdl download $spotifyURL
-}
-
-#CPP
+## CPP Run
 function cr {
   param (
     [string]$path,
@@ -63,6 +26,7 @@ function cr {
   g++.exe -o $path $name
 }
 
+## CPP Build
 function crb {
   param (
     [string]$OutputName = "program",
@@ -74,6 +38,7 @@ function crb {
 }
 
 
+
 # Go
 # Go Run
 function gor {
@@ -82,32 +47,6 @@ function gor {
   )
   if($ProjectRoot -eq ""){ $ProjectRoot = (Get-Location).Path + "\main.go" }
   go.exe run $path
-}
-
-
-
-# Eza
-function tree {
-  param (
-    [string]$path
-  )
-  if($path -eq ""){ $path= Get-Location }
-  eza -T $path
-}
-
-## Typst
-function tpr {
-  param (
-    [string]$path
-  )
-  typst.exe compile $path
-}
-
-function tpv {
-  param (
-    [string]$path
-  )
-  typst.exe watch $path
 }
 
 

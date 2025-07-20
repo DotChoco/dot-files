@@ -1,8 +1,3 @@
-#Variables
-$MATHDIR = "$UTILSDIR/maths"
-
-
-
 
 ##Set scale
 function scale{
@@ -10,12 +5,6 @@ function scale{
   return [Math]::Round([double]$Scale[0], [int]$Scale[1])
 }
 
-##Set scale
-function scl{
-  param([object[]]$Scale)
-  $Result = scale $Scale
-  echo $Result
-}
 
 ##Pow any value
 function pow {
@@ -37,7 +26,7 @@ function gt {
 }
 
 
-#Imports
-. "$MATHDIR/taxes.ps1"
+#Alias
+Set-Alias scl scale
 
 
