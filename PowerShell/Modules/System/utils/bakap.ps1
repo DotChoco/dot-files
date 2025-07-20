@@ -21,7 +21,7 @@ function bakvi {
   #Go to dot-files dir
   cd $BAKDIR
 
-  #Replace the PowerShell Folder
+  #Replace the Nvim Folder
   fr $Target
   ffc $VIDIR $Destiny
 
