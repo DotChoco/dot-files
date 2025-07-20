@@ -1,3 +1,5 @@
+$defaultIcon = [pscustomobject]@{ Icon="`u{f0f6}"; Color=$PSStyle.Foreground.FromRgb(163,163,163) }
+
 # Map
 $iconMap = & {
   # Variables
@@ -11,15 +13,14 @@ $iconMap = & {
   $pdf= [pscustomobject]@{ Icon="`u{f1c1}"; Color=$PSStyle.Foreground.FromRgb(255, 80, 80) }
   $folder= [pscustomobject]@{ Icon="`u{e5ff}"; Color=$PSStyle.Foreground.FromRgb(210,210,210) }
   $giticon= [pscustomobject]@{ Icon="`u{e5ff}"; Color=$PSStyle.Foreground.FromRgb(210,210,210) }
-  $jsx= [pscustomobject]@{ Icon="`u{e5ff}"; Color=$PSStyle.Foreground.FromRgb(210,210,210) }
+  $jsx= [pscustomobject]@{ Icon="`u{ed0d}"; Color=$PSStyle.Foreground.FromRgb(229, 192, 123) }
   $docx= [pscustomobject]@{ Icon="`u{f1c2}"; Color=$PSStyle.Foreground.FromRgb(107, 164, 255) }
   $bins= [pscustomobject]@{ Icon="`u{f471}"; Color=$PSStyle.Foreground.FromRgb(255, 70, 135) }
-  $lua= [pscustomobject]@{ Icon="`u{e620}"; Color=$PSStyle.Foreground.FromRgb(229, 192, 123) }
-  $cpp= [pscustomobject]@{ Icon="`u{e627}"; Color=$PSStyle.Foreground.FromRgb(110, 191, 252) }
-  $csharp= [pscustomobject]@{ Icon="`u{e7b2}"; Color=$PSStyle.Foreground.FromRgb(144, 131, 242) }
-  $cpp= [pscustomobject]@{ Icon="`u{e61d}"; Color=$PSStyle.Foreground.FromRgb(66, 197, 233) }
+  $lua= [pscustomobject]@{ Icon="`u{e620}"; Color=$PSStyle.Foreground.FromRgb(110, 119, 250) }
+  $golang= [pscustomobject]@{ Icon="`u{e627}"; Color=$PSStyle.Foreground.FromRgb(110, 191, 252) }
+  $csharp= [pscustomobject]@{ Icon="`u{e7b2}"; Color=$PSStyle.Foreground.FromRgb(162, 131, 242) }
+  $cpp= [pscustomobject]@{ Icon="`u{e61d}"; Color=$PSStyle.Foreground.FromRgb(131, 140, 242) }
   $rust= [pscustomobject]@{ Icon="`u{e7a8}"; Color=$PSStyle.Foreground.FromRgb(244, 80, 111) }
-  $defaultIcon = [pscustomobject]@{ Icon="`u{ed0d}"; Color=$PSStyle.Foreground.FromRgb(229, 192, 123) }
 
   # KeyValues
   @{
