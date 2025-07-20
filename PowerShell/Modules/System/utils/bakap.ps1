@@ -1,29 +1,28 @@
 function bakps {
-  $Target = "$BAKDIR/PowerShell"
   param ([string]$Destiny = $BAKDIR)
+  $Target = "$BAKDIR/PowerShell"
 
   #Go to dot-files dir
   cd $BAKDIR
 
   #Replace the PowerShell Folder
   fr $Target
-  ffc $PWSDIR $Target
+  ffc $PWSDIR $Destiny
 
   fcm
 }
 
 
 function bakvi {
+  param([string]$Destiny = $BAKDIR)
   $Target = "$BAKDIR/nvim"
-  param ([string]$Destiny = $BAKDIR)
-
 
   #Go to dot-files dir
   cd $BAKDIR
 
   #Replace the PowerShell Folder
   fr $Target
-  ffc $VIDIR $Target
+  ffc $VIDIR $Destiny
 
   fcm
 }
