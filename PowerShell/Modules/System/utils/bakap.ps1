@@ -9,6 +9,7 @@ function bakps {
   fr $Target
   ffc $PWSDIR $Destiny
 
+  #Fast Commit
   fcm
 }
 
@@ -24,6 +25,7 @@ function bakvi {
   fr $Target
   ffc $VIDIR $Destiny
 
+  #Fast Commit
   fcm
 }
 
