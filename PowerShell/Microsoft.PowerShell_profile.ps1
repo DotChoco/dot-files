@@ -6,6 +6,7 @@ $HOMEDIR = "E:/carlo"
 $PWSDIR = "$HOMEDIR/Documents/PowerShell"
 $DEVDIR = "D:/Github"
 $VIDIR = "$env:LOCALAPPDATA/nvim"
+$BAKDIR = "$DEVDIR/dot-files"
 
 
 # Imports

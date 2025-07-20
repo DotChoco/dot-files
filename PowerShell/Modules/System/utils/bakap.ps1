@@ -1,34 +1,29 @@
 function bakps {
-  param (
-    [Parameter(Mandatory=$true)]
-    [string]$Destiny
-  )
+  $Target = "$BAKDIR/PowerShell"
+  param ([string]$Destiny = $BAKDIR)
 
   #Go to dot-files dir
-  cd "$DEVDIR/dot-files"
+  cd $BAKDIR
 
   #Replace the PowerShell Folder
-  $CurrentDir = Get-Location
-  fr "$CurrentDir/PowerShell"
-  ffc $PWSDIR $CurrentDir
+  fr $Target
+  ffc $PWSDIR $Target
 
   fcm
 }
 
 
 function bakvi {
-  param (
-    [Parameter(Mandatory=$true)]
-    [string]$Destiny
-  )
+  $Target = "$BAKDIR/nvim"
+  param ([string]$Destiny = $BAKDIR)
+
 
   #Go to dot-files dir
-  cd "$CurrentDir/dot-files"
+  cd $BAKDIR
 
   #Replace the PowerShell Folder
-  $CurrentDir = Get-Location
-  fr "$CurrentDir/nvim"
-  ffc $VIDIR $CurrentDir
+  fr $Target
+  ffc $VIDIR $Target
 
   fcm
 }
