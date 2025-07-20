@@ -1,8 +1,8 @@
 # Functions
 function jj { cd "$HOMEDIR/Download"} # home dir
-function gg { cd "D:/Github"} # dev dir
+function gg { cd $DEVDIR } # dev dir
 function psd { cd $PWSDIR } #Go to the PowerShell Path
-function nvc { cd $env:LOCALAPPDATA/nvim } #Go to the Nvim Path
+function nvc { cd $VIDIR } #Go to the Nvim Path
 function ~ { jj }
 function .. { cd .. } #Make a backward move
 

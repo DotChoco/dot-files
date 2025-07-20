@@ -4,6 +4,9 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 # Global Variables
 $HOMEDIR = "E:/carlo"
 $PWSDIR = "$HOMEDIR/Documents/PowerShell"
+$DEVDIR = "D:/Github"
+$VIDIR = "$env:LOCALAPPDATA/nvim"
+
 
 # Imports
 Import-Module System -Force
