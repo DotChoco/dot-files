@@ -29,11 +29,29 @@ function Test-PathExists {
   [CmdletBinding()]
   param (
     [Parameter(Mandatory=$true, Position=0)]
-    [string]$Path # El parámetro que recibirá la ruta a verificar
+    [string]$Path # Parameter of type string
   )
 
   if (Test-Path -Path $Path) { return $true}
   else { return $false }
+}
+
+function Remove-ItemForcefully{
+  param (
+    [Parameter(Mandatory=$true)] # Makes the parameter required
+    [object[]]$files             # Parameter of type string
+  )
+  rm $files -Force -Recurse
+}
+
+function Copy-ItemForcefully{
+  param (
+    [Parameter(Mandatory=$true)] # Makes the parameter required
+    [object[]]$files,             # Parameter of type string
+    [Parameter(Mandatory=$true)] # Makes the parameter required
+    [string]$destiny             # Parameter of type string
+  )
+  cp $files $destiny -Force -Recurse
 }
 
 
@@ -48,5 +66,7 @@ Set-Alias cls clear
 Set-Alias cc clear
 Set-Alias mk mkdir
 Set-Alias xx ex
+Set-Alias fr Remove-ItemForcefully
+Set-Alias ffc Copy-ItemForcefully
 
 

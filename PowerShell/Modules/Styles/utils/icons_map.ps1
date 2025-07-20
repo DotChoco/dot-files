@@ -1,5 +1,3 @@
-$defaultIcon = [pscustomobject]@{ Icon="`u{f0f6}"; Color=$PSStyle.Foreground.FromRgb(163,163,163) }
-
 # Map
 $iconMap = & {
   # Variables

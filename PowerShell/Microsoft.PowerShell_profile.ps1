@@ -11,4 +11,6 @@ Import-Module Styles -Force
 Import-Module Maths -Force
 Import-Module Testing -Force
 
+Remove-Variable BasePath -ErrorAction SilentlyContinue
+
 # clear

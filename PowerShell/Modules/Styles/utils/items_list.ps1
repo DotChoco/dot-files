@@ -3,6 +3,7 @@ function la {
   $supportsVT = $Host.UI.SupportsVirtualTerminal
   $icon = $defaultIcon.Icon
   $color = $defaultIcon.Color
+  $defaultIcon = [pscustomobject]@{ Icon="`u{f0f6}"; Color=$PSStyle.Foreground.FromRgb(163,163,163) }
 
   foreach ($it in $items) {
     if ($it.PSIsContainer) {
