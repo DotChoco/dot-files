@@ -1,8 +1,8 @@
 # Git
 ## Git add All
 function gta {
-  param([object[]]$comment)
-  if(!$comment){ git add . }
+  param([object[]]$files)
+  if(!$files){ git add . }
   else{ git add @($files)}
 }
 
