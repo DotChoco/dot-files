@@ -63,3 +63,51 @@ function ppn{
 
 }
 
+
+## Calculate the ISR from(FA Nomina)
+function CalculateISR{
+  param (
+    [decimal]$SueldoDiario,
+    [int]$Periodicidad=0
+  )
+  $file = "dia.csv"
+  if ($Periodicidad -eq 1){$file = "bim.csv"}
+  if ($Periodicidad -eq 2){$file = "cato.csv"}
+  if ($Periodicidad -eq 3){$file = "dece.csv"}
+  if ($Periodicidad -eq 4){$file = "men.csv"}
+  if ($Periodicidad -eq 5){$file = "quin.csv"}
+  if ($Periodicidad -eq 6){$file = "sem.csv"}
+
+  $data = Import-Csv -Path "$PWSDIR/Modules/Maths/docs/isr_$file" -Delimiter ','
+
+  foreach ($row in $data) {
+    # Convert the fields to decimal values
+    [decimal]$limInf = $row.'Límite Inferior'
+    [decimal]$limSup = $row.'Límite Superior'
+    [decimal]$cuota  = $row.'Cuota Fija'
+    [decimal]$perc   = $row.'% Excedente'
+
+    if ($SueldoDiario -ge $limInf -and $SueldoDiario -le $limSup) {
+      $excedente = $SueldoDiario - $limInf
+      $impuesto = $cuota + ($excedente * ($perc / 100))
+      # Write-Host "$excedente , $impuesto"
+      # Write-Host "$limInf–$limSup : cuota $cuota, % $perc"
+      return (scale $impuesto,2)
+    }
+
+  }
+
+}
+
+
+# Usage
+function isr{
+  while ($true) {
+    $salario = Read-Host "Introduce el sueldo diario"
+    $peri = Read-Host "Introduce la periodicidad"
+    $isr = CalculateISR -SueldoDiario $salario -Periodicidad $peri
+    Write-Host "El ISR diario es: $isr"
+    $salario = Read-Host "Presiona cualquier tecla para calcular de nuevo"
+  }
+}
+
