@@ -34,4 +34,4 @@ function spd {
   python.exe -m spotdl --output "$HOMEDIR/Musica/{artist}-{title}.mp3" $spotifyURL
 }
 
-
+Set-Alias tre tree

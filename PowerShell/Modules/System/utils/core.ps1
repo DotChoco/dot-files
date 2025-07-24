@@ -1,5 +1,6 @@
 # Functions
-function jj { cd "$HOMEDIR/Download"} # home dir
+## Dirs
+function jj { cd "$HOMEDIR"} # home dir
 function gg { cd $DEVDIR } # dev dir
 function psd { cd $PWSDIR } #Go to the PowerShell Path
 function nvc { cd $VIDIR } #Go to the Nvim Path
@@ -10,13 +11,14 @@ function ee { exit } #Close the terminal
 function dd { shutdown /s /t 0 } #Shutdown the PC
 
 
+## Custom Behaviours
 function ex {
   param([string]$Path)
   if($Path -eq ""){$Path = Get-Location}
   explorer $Path
 } #Open File Explorer
 
-# Copy to Clipboard
+### Copy to Clipboard
 function cb {
   param (
     [Parameter(Mandatory=$true)] # Makes the parameter required
@@ -25,6 +27,7 @@ function cb {
   cat $FilePath | scb
 }
 
+### Check if the path exists
 function Test-PathExists {
   [CmdletBinding()]
   param (
@@ -36,6 +39,7 @@ function Test-PathExists {
   else { return $false }
 }
 
+### Remove recursive an item forcefully
 function Remove-ItemForcefully{
   param (
     [Parameter(Mandatory=$true)] # Makes the parameter required
@@ -44,6 +48,7 @@ function Remove-ItemForcefully{
   rm $files -Force -Recurse
 }
 
+### Copy recursive an item forcefully
 function Copy-ItemForcefully{
   param (
     [Parameter(Mandatory=$true)] # Makes the parameter required
