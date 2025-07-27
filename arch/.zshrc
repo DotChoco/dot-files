@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-
-=======
 # Colores RGB (formato ANSI de 24 bits)
 CWD_COLOR="%F{#e5c07b}"
 TIME_COLOR="%F{#98c371}"
@@ -38,4 +35,3 @@ function build_prompt() {
 # Hook para actualizar el prompt dinámicamente
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd build_prompt
->>>>>>> bdafc8738534e4074087c5592ae09011df083d5d
