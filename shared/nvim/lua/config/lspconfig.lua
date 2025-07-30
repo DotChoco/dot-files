@@ -4,10 +4,9 @@ local bin_ext
 function get_bin_path()
   if linux == true then
     bin_ext = ""
-    return "~/.local/share/nvim/mason/bin/"
   end
   bin_ext = ".cmd"
-  return "C:/Users/carlo/AppData/Local/nvim-data/mason/bin/"
+  return vim.fn.stdpath("data") .. "/mason/bin/"
 end
 
 local linux = true
