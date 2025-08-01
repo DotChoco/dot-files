@@ -6,7 +6,7 @@ function get_bin_path()
     bin_ext = ""
   end
   bin_ext = ".cmd"
-  return vim.fn.stdpath("data") .. "/mason/bin/"
+  return vim.fn.stdpath("data") .. "\\mason\\bin\\"
 end
 
 local linux = true
