@@ -2,9 +2,9 @@
 Set-PSReadLineOption -PredictionViewStyle ListView
 
 # Global Variables
-$HOMEDIR = "E:/carlo"
+$HOMEDIR = "E:/../"
 $PWSDIR = "$HOMEDIR/Documents/PowerShell"
-$DEVDIR = "D:/Github"
+$DEVDIR = "D:/../"
 $VIDIR = "$env:LOCALAPPDATA/nvim"
 $BAKDIR = "$DEVDIR/dot-files"
 $CONTADIR="$PWSDIR/Modules/Contability"
