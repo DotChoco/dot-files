@@ -1,4 +1,4 @@
-#Calculate the IEPS (Sin Impuestos)
+#Calculate the Tranfer (Without taxes)
 function pps{
   param([object[]]$Data)
 
@@ -26,7 +26,7 @@ function pps{
 
 }
 
-#Calculate the IEPS (NETO)
+#Calculate the Tranfer (NETO)
 function ppn{
   param([object[]]$Data)
 
