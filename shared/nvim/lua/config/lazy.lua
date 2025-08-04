@@ -61,29 +61,14 @@ vim.cmd(csc .. theme )
 require("mason").setup()
 
 require("mason-lspconfig").setup {
-  -- handlers = {
-  --   omnisharp = function()
-  --     lspconfig.omnisharp.setup({
-  --       handlers = { ['textDocument/definition'] = require('omnisharp_extended').handler }
-  --     })
-  --   end
-  -- },
-  automatic_enable = {
-      "lua_ls",
-      "csharp_ls",
-      "rust_analyzer",
-      "gopls",
-      "clangd",
-     "tsserver"
-  },
-  ensure_installed = {
-    "lua_ls",
-    "csharp_ls",
-    "rust_analyzer",
-    "gopls",
-    "clangd",
-    "tsserver"
-  },
+  -- automatic_enable = {
+  --   "lua_ls",
+  --   "csharp_ls",
+  --   "rust_analyzer",
+  --   "gopls",
+  --   "clangd",
+  --   "tsserver"
+  -- }
 }
 
 
