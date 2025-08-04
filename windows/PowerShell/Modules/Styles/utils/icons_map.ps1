@@ -10,7 +10,7 @@ $iconMap = & {
   $excel= [pscustomobject]@{ Icon="`u{f1c3}"; Color=$PSStyle.Foreground.FromRgb(140, 255, 140) }
   $pdf= [pscustomobject]@{ Icon="`u{f1c1}"; Color=$PSStyle.Foreground.FromRgb(255, 80, 80) }
   $folder= [pscustomobject]@{ Icon="`u{e5ff}"; Color=$PSStyle.Foreground.FromRgb(210,210,210) }
-  $giticon= [pscustomobject]@{ Icon="`u{e5ff}"; Color=$PSStyle.Foreground.FromRgb(210,210,210) }
+  $giticon= [pscustomobject]@{ Icon="`u{e702}"; Color=$PSStyle.Foreground.FromRgb(245, 0, 0) }
   $jsx= [pscustomobject]@{ Icon="`u{ed0d}"; Color=$PSStyle.Foreground.FromRgb(229, 192, 123) }
   $docx= [pscustomobject]@{ Icon="`u{f1c2}"; Color=$PSStyle.Foreground.FromRgb(107, 164, 255) }
   $bins= [pscustomobject]@{ Icon="`u{f471}"; Color=$PSStyle.Foreground.FromRgb(255, 70, 135) }
