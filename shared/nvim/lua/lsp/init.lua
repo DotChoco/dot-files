@@ -8,12 +8,12 @@ vim.diagnostic.config({
 
 -- Load each configuration of LSP
 require("lsp.csharp")
-require("lsp.lua_ls")
+require("lsp.lua_lsp")
 require("lsp.rust")
 require("lsp.go")
-require("lsp.clang")
-require("lsp.cmake")
-require("lsp.ts")
+-- require("lsp.clang")
+-- require("lsp.cmake")
+-- require("lsp.ts")
 
 
 
