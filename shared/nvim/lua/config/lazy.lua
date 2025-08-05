@@ -62,16 +62,24 @@ require("mason").setup()
 require("lsp")
 
 
--- require("mason-lspconfig").setup {
---   -- automatic_enable = {
---   --   "lua_ls",
---   --   "csharp_ls",
---   --   "rust_analyzer",
---   --   "gopls",
---   --   "clangd",
---   --   "tsserver"
---   -- }
--- }
+require("mason-lspconfig").setup {
+ automatic_enable = {
+      "lua_ls",
+      "csharp_ls",
+      "rust_analyzer",
+      "gopls",
+      "clangd",
+     "tsserver"
+  },
+  ensure_installed = {
+    "lua_ls",
+    "csharp_ls",
+    "rust_analyzer",
+    "gopls",
+    "clangd",
+    "tsserver"
+  },
+}
 
 
 
