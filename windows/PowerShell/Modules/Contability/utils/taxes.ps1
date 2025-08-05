@@ -1,5 +1,5 @@
 #Calculate the Tranfer (Without taxes)
-function pps{
+function tts{
   param([object[]]$Data)
 
   #UNIT PRICE
@@ -27,7 +27,7 @@ function pps{
 }
 
 #Calculate the Tranfer (NETO)
-function ppn{
+function ttn{
   param([object[]]$Data)
 
   #UNIT PRICE
