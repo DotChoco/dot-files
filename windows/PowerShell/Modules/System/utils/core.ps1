@@ -3,6 +3,7 @@
 function jj { cd "$HOMEDIR"} # home dir
 function gg { cd $DEVDIR } # dev dir
 function psd { cd $PWSDIR } #Go to the PowerShell Path
+function df { cd $DFDIR }
 function nvc { cd $VIDIR } #Go to the Nvim Path
 function ~ { jj }
 function .. { cd .. } #Make a backward move

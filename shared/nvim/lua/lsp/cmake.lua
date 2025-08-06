@@ -1,9 +1,8 @@
+local lspconfig = require("lspconfig")
+local M = require("lsp.utils")
 
-
-
-
-
-
+local bin_ext = M.get_bin_ext()
+local bin_path = M.get_bin_path()
 
 lspconfig.cmake.setup({
   filetypes = { 'cmake' },

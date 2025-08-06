@@ -6,12 +6,22 @@ function gta {
   else{ git add @($files)}
 }
 
+##Git Diff
+function gtd {
+  param(
+    [Parameter(Mandatory=$true)] # Makes the parameter required
+    [string]$path
+  )
+  git diff $path
+}
+
 ##Git Commit
 function gtm {
   param([string]$comment)
   if($comment -eq ""){ $comment = "f: menor update" }
   git commit -m $comment
 }
+
 
 ##Git Log
 function gtl {

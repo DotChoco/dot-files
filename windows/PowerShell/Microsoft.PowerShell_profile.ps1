@@ -6,7 +6,7 @@ $HOMEDIR = "E:/../"
 $PWSDIR = "$HOMEDIR/Documents/PowerShell"
 $DEVDIR = "D:/../"
 $VIDIR = "$env:LOCALAPPDATA/nvim"
-$BAKDIR = "$DEVDIR/dot-files"
+$DFDIR = "$DEVDIR/dot-files"
 $CONTADIR="$PWSDIR/Modules/Contability"
 
 

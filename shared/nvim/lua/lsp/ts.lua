@@ -1,8 +1,11 @@
+local lspconfig = require("lspconfig")
+local M = require("lsp.utils")
 
-
-
-
+local capabilities, on_attach = M.get_common()
+local bin_ext = M.get_bin_ext()
+local bin_path = M.get_bin_path()
 local ts_path = bin_path .. "typescript-language-server" .. bin_ext
+
 
 lspconfig.ts_ls.setup({
   capabilities = capabilities,
