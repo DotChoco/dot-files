@@ -7,7 +7,7 @@ function tts{
 
   $IEPS = [double]$Data[1]
   $TAX = [double]$Data[2]
-  $DECIMALS = ([int]$DECIMALS -gt 0) ? [int]$Data[3] : 2
+  $DECIMALS = ([int]$Data[3] -gt 0) ? [int]$Data[3] : 2
 
   #UNIT PRICE IEPS
   $UPI = $UP * $IEPS
@@ -23,7 +23,6 @@ function tts{
 
   Write-Host("Total: " + $RESULT)
   Write-Host("Traslados: " + $TRANSFERS)
-
 }
 
 #Calculate the Tranfer (NETO)
@@ -35,22 +34,19 @@ function ttn{
 
   $IEPS = [double]$Data[1]
   $TAX = [double]$Data[2]
-  $DECIMALS = ([int]$DECIMALS -gt 0) ? [int]$Data[3] : 2
+  $DECIMALS = ([int]$Data[3] -gt 0) ? [int]$Data[3] : 2
 
-  $MAX_PORCENT = 100
-  $TAX_PORCENT = $TAX * $MAX_PORCENT
-  $IEPS_PORCENT = $IEPS * $MAX_PORCENT
+  $MAX_PORCENT = 1
+  $TAX_PORCENT = $TAX + $MAX_PORCENT
+  $IEPS_PORCENT = $IEPS + $MAX_PORCENT
 
   #UNIT PRICE TAX
-  $TAX_MAX_PORCENT = $MAX_PORCENT + $TAX_PORCENT
-  [double]$UPTAX = ($TAX_PORCENT * $UP) / $TAX_MAX_PORCENT
+  [double]$UPTAX = ($TAX * $UP) / $TAX_PORCENT
 
 
   #UNIT PRICE IEPS
-  $IEPS_MAX_PORCENT = $MAX_PORCENT + $IEPS_PORCENT
-
   [double]$UPIEPS_SUBSTRACT = $UP - $UPTAX
-  [double]$UPI = ($IEPS_PORCENT * $UPIEPS_SUBSTRACT) / $IEPS_MAX_PORCENT
+  [double]$UPI = ($IEPS * $UPIEPS_SUBSTRACT) / $IEPS_PORCENT
 
 
   #RESULTS
@@ -62,7 +58,6 @@ function ttn{
 
   Write-Host("Total: " + $RES_TOTAL)
   Write-Host("Traslados: " + $RES_TRANSFERS)
-
 }
 
 
