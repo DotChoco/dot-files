@@ -24,6 +24,14 @@
             "id": "User.paste"
         },
         {
+            "command":
+            {
+                "action": "splitPane",
+                "split": "left"
+            },
+            "id": "User.splitPane.21DBB4A1"
+        },
+        {
             "command": "find",
             "id": "User.find"
         },
@@ -50,11 +58,15 @@
         }
     ],
     "alwaysShowNotificationIcon": false,
-    "centerOnLaunch": false,
+    "alwaysShowTabs": true,
+    "autoHideWindow": false,
+    "confirmCloseAllTabs": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{14fc8357-0542-4bca-bdd9-d7348db5c1d1}",
-    "initialCols": 180,
+    "defaultProfile": "{c1b7dffe-1f4a-4ce4-ad6b-1aaddd848750}",
+    "disableAnimations": false,
+    "firstWindowPreference": "defaultProfile",
+    "focusFollowMouse": false,
     "initialPosition": ",",
     "keybindings":
     [
@@ -75,23 +87,20 @@
             "keys": "ctrl+v"
         },
         {
+            "id": "User.togglePaneZoom",
+            "keys": "alt+q"
+        },
+        {
             "id": "User.splitPane.A6751878",
             "keys": "alt+shift+d"
         },
         {
             "id": "User.splitPane.D5151347",
             "keys": "ctrl+'"
-        },
-        {
-            "id": null,
-            "keys": "alt+enter"
-        },
-        {
-            "id": "User.togglePaneZoom",
-            "keys": "ctrl+l"
         }
     ],
-    "launchMode": "fullscreen",
+    "language": "en-US",
+    "launchMode": "maximized",
     "minimizeToNotificationArea": false,
     "newTabMenu":
     [
@@ -101,7 +110,10 @@
     ],
     "profiles":
     {
-        "defaults": {},
+        "defaults":
+        {
+            "colorScheme": "Dark+"
+        },
         "list":
         [
             {
@@ -114,7 +126,7 @@
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
-                "name": "Command Prompt"
+                "name": "S\u00edmbolo del sistema"
             },
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
@@ -123,81 +135,67 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-                "hidden": false,
-                "name": "Git Bash",
-                "source": "Git"
-            },
-            {
-                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-                "hidden": false,
-                "name": "PowerShell",
-                "source": "Windows.Terminal.PowershellCore"
-            },
-            {
-                "colorScheme": "C-Colors",
-                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
-                "cursorShape": "filledBox",
-                "font":
-                {
-                    "face": "CaskaydiaCove Nerd Font Mono",
-                    "size": 18
-                },
-                "guid": "{14fc8357-0542-4bca-bdd9-d7348db5c1d1}",
-                "hidden": false,
-                "icon": "E:\\carlo\\Download\\Pin\\Windows_icon-icons.com_67026(1).png",
-                "name": "DotChoco",
-                "startingDirectory": "D:\\Github"
-            },
-            {
-                "guid": "{4c032f17-0a02-51a7-a5c4-d3ab639da353}",
+                "guid": "{ac8f433e-b2ee-591f-a5a8-499a41ea7fba}",
                 "hidden": false,
                 "name": "Developer Command Prompt for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "guid": "{a7dd747f-ad02-542b-a863-86645cec6a80}",
+                "guid": "{99625d1b-efa7-55d1-ae99-8a1179b5a2dc}",
                 "hidden": false,
                 "name": "Developer PowerShell for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "guid": "{5fb123f1-af88-5b5c-8953-d14a8def1978}",
+                "adjustIndistinguishableColors": "never",
+                "backgroundImage": null,
+                "backgroundImageOpacity": 0.06,
+                "cursorShape": "filledBox",
+                "experimental.retroTerminalEffect": false,
+                "font":
+                {
+                    "face": "CaskaydiaCove Nerd Font Mono",
+                    "size": 14
+                },
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
-                "name": "PowerShell 7",
-                "source": "Windows.Terminal.PowershellCore"
+                "intenseTextStyle": "none",
+                "name": "PWS",
+                "padding": "4",
+                "scrollbarState": "hidden",
+                "source": "Windows.Terminal.PowershellCore",
+                "startingDirectory": "D:\\descargas\\Jose-Files",
+                "useAcrylic": false
             },
             {
-                "guid": "{146096a9-5154-5566-ad4f-a7e84f9f880e}",
-                "hidden": true,
-                "name": "Developer Command Prompt for VS 2019",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{ab0d0a20-ea35-5d1c-8e7b-9efadc636637}",
-                "hidden": true,
-                "name": "Developer PowerShell for VS 2019",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{1d5d105c-9051-57a4-9453-99bd5dca8f66}",
+                "adjustIndistinguishableColors": "never",
+                "backgroundImage": null,
+                "backgroundImageOpacity": 0.06,
+                "commandline": "\"C:\\Users\\techl\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\"",
+                "cursorShape": "filledBox",
+                "experimental.retroTerminalEffect": false,
+                "font":
+                {
+                    "face": "CaskaydiaCove Nerd Font Mono",
+                    "size": 17
+                },
+                "guid": "{c1b7dffe-1f4a-4ce4-ad6b-1aaddd848750}",
                 "hidden": false,
-                "name": "Ubuntu",
-                "source": "Microsoft.WSL"
-            },
-            {
-                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
-                "hidden": true,
-                "name": "Visual Studio Debug Console",
-                "source": "VSDebugConsole"
+                "icon": "ms-appx:///ProfileIcons/pwsh.png",
+                "intenseTextStyle": "none",
+                "name": "JC",
+                "padding": "4",
+                "scrollbarState": "hidden",
+                "startingDirectory": "D:\\descargas\\Jose-Files",
+                "useAcrylic": false
             }
         ]
     },
     "schemes":
     [
         {
-            "background": "#222222",
-            "black": "#282C34",
+            "background": "#282C34",
+            "black": "#14161A",
             "blue": "#61AFEF",
             "brightBlack": "#5A6374",
             "brightBlue": "#61AFEF",
@@ -211,7 +209,7 @@
             "cyan": "#56B6C2",
             "foreground": "#DCDFE4",
             "green": "#98C379",
-            "name": "C-Colors",
+            "name": "One H-Dark ",
             "purple": "#C678DD",
             "red": "#E06C75",
             "selectionBackground": "#FFFFFF",
@@ -219,6 +217,7 @@
             "yellow": "#E5C07B"
         }
     ],
+    "showTabsInTitlebar": true,
     "tabWidthMode": "equal",
     "theme": "dark",
     "themes": [],

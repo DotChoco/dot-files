@@ -1,7 +1,7 @@
 function Aguinaldo{
   param([object[]]$Data)
   $SBD = [double]$Data[0]
-  $DA = if($DA -eq 0){ 15 } else{ [double]$Data[1] }
+  $DA = if($DA -lt 1){ 15 } else{ [double]$Data[1] }
   $DL = [double]$Data[2]
 
   if($DL -lt 365) { return scale ($SBD * $DA * ($DL/365)),2 }
@@ -12,32 +12,35 @@ function Aguinaldo{
 
 ## Calculate the ISR from(FA Nomina)
 function ISR{
-  param (
-    [decimal]$SueldoDiario,
-    [int]$Periodicidad=0
-  )
-  $file = "dia.csv"
-  if ($Periodicidad -eq 1){$file = "bim.csv"}
-  if ($Periodicidad -eq 2){$file = "cato.csv"}
-  if ($Periodicidad -eq 3){$file = "dece.csv"}
-  if ($Periodicidad -eq 4){$file = "men.csv"}
-  if ($Periodicidad -eq 5){$file = "quin.csv"}
-  if ($Periodicidad -eq 6){$file = "sem.csv"}
+  param([object[]]$Data)
+  [decimal]$SueldoDiario= $Data[0]
+  [int]$Periodicidad=if([int]$Data[1] -lt 1){ 0 } else{ [int]$Data[1] }
+  [int]$Decimals=if([int]$Data[2] -lt 1 -and [int]$Data[2] -gt 6 ){ 2 } else{ [int]$Data[2] }
 
-  $data = Import-Csv -Path "$PWSDIR/Modules/Contability/docs/isr_$file" -Delimiter ','
+ $mapa = @{
+    1 = "bim.csv"
+    2 = "cato.csv"
+    3 = "dece.csv"
+    4 = "men.csv"
+    5 = "quin.csv"
+    6 = "sem.csv"
+  }
+
+  # Set the value from the map if exists, else set the default value "dia.csv"
+  $file = if ($mapa.ContainsKey($Periodicidad)) { "isr_" + $mapa[$Periodicidad] } else { "isr_dia.csv" }
+
+
+  $data = Import-Csv -Path "$PWSDIR/Modules/Contability/docs/$file" -Delimiter ','
 
   foreach ($row in $data) {
     # Convert the fields to decimal values
     [decimal]$limInf = $row.'Límite Inferior'
     [decimal]$limSup = $row.'Límite Superior'
     [decimal]$cuota  = $row.'Cuota Fija'
-    [decimal]$perc   = $row.'% Excedente'
+    [decimal]$tasa   = [decimal]$row.'% Excedente' / 100
 
     if ($SueldoDiario -ge $limInf -and $SueldoDiario -le $limSup) {
-      $excedente = $SueldoDiario - $limInf
-      $impuesto = $cuota + ($excedente * ($perc / 100))
-      # Write-Host "$excedente , $impuesto"
-      # Write-Host "$limInf–$limSup : cuota $cuota, % $perc"
+      $impuesto = (($SueldoDiario - $limInf) * $tasa) + $cuota
       return (scale $impuesto,2)
     }
 
