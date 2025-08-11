@@ -58,7 +58,6 @@ require 'nvim-treesitter.configs'.setup {
   },
 }
 
-require("config.asciiart").show_ascii_art()
 
 local default_lualine_config = {
   options = {

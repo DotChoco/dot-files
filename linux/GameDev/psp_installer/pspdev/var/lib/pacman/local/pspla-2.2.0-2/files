@@ -1,0 +1,11 @@
+%FILES%
+psp/
+psp/include/
+psp/include/pspla2.h
+psp/lib/
+psp/lib/libpspla2.a
+psp/share/
+psp/share/licenses/
+psp/share/licenses/pspla/
+psp/share/licenses/pspla/LICENSE
+

@@ -14,9 +14,12 @@ New-Item -ItemType Junction -Path "$env:LOCALAPPDATA/nvim" -Target "$SHARED/nvim
 if(Test-Path -Path "$env:APPDATA/alacritty/") { rm "$env:APPDATA/alacritty/" -Force -Recurse }
 New-Item -ItemType Junction -Path "$env:APPDATA/alacritty/" -Target "$WIN/alacritty/"
 
-#Adding the NerdFont
+# Adding the NerdFont
 cp "$SHARED/Fonts/CaskaydiaCove/*" "C:/Windows/Fonts/"
 
+# Git will discard all changes that could be made into this files
+git update-index --assume-unchanged .\shared\nvim\lazy-lock.json
+git update-index --assume-unchanged windows/PowerShell/Microsoft.PowerShell_profile.ps1
 
 Remove-Variable WIN -ErrorAction SilentlyContinue
 Remove-Variable SHARED -ErrorAction SilentlyContinue

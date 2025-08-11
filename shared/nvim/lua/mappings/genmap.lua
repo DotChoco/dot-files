@@ -1,7 +1,6 @@
 -- Leader key
 vim.g.mapleader = ' '
 local keymap= vim.keymap
-local ascii = require('config.asciiart')
 
 keymap.set('n', '<C-s>', '<cmd>write<CR>', { noremap = true, silent = true, desc = "Guardar archivo" })
 
@@ -17,7 +16,5 @@ keymap.set('x', '<Space>/', '<ESC><Cmd>lua require("Comment.api").toggle.linewis
 
 -- Desactivate search result highlights
 keymap.set('n', '<leader>h', ':nohlsearch<CR>', { desc = 'Clear search highlights' })
-
-keymap.set('n', '<C-m>', ascii.show_ascii_art, { desc = 'Mostrar vista de bienvenida' })
 
 

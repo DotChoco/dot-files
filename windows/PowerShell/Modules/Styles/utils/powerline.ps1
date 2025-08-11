@@ -9,7 +9,7 @@ function global:prompt {
   # Formatear tiempo
   $time = Get-Date -Format "HH:mm"
 
-  # Definir s├¡mbolos con fallbacks
+  # Definir simbolos con fallbacks
   $arrow = if ($Host.UI.SupportsVirtualTerminal) {
       "`u{276F}" } else { ">" }
 

@@ -1,0 +1,17 @@
+%FILES%
+psp/
+psp/include/
+psp/include/physfs.h
+psp/lib/
+psp/lib/cmake/
+psp/lib/cmake/PhysFS/
+psp/lib/cmake/PhysFS/PhysFSConfig-release.cmake
+psp/lib/cmake/PhysFS/PhysFSConfig.cmake
+psp/lib/libphysfs.a
+psp/lib/pkgconfig/
+psp/lib/pkgconfig/physfs.pc
+psp/share/
+psp/share/licenses/
+psp/share/licenses/physfs/
+psp/share/licenses/physfs/LICENSE.txt
+

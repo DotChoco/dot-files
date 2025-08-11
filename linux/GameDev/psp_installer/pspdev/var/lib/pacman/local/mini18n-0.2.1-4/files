@@ -1,0 +1,11 @@
+%FILES%
+psp/
+psp/include/
+psp/include/mini18n.h
+psp/lib/
+psp/lib/libmini18n.a
+psp/share/
+psp/share/licenses/
+psp/share/licenses/mini18n/
+psp/share/licenses/mini18n/COPYING
+

@@ -1,0 +1,39 @@
+%NAME%
+libeigen
+
+%VERSION%
+3.4.0-3
+
+%BASE%
+libeigen
+
+%DESC%
+C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms
+
+%URL%
+http://eigen.tuxfamily.org
+
+%ARCH%
+mips
+
+%BUILDDATE%
+1743510502
+
+%INSTALLDATE%
+1743529504
+
+%PACKAGER%
+Unknown Packager
+
+%SIZE%
+8679245
+
+%GROUPS%
+pspdev-default
+
+%LICENSE%
+MPL-2.0 AND BSD-3-Clause AND LGPL-2.1-only AND LGPL-2.1-or-later
+
+%VALIDATION%
+sha256
+

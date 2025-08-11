@@ -1,0 +1,44 @@
+%NAME%
+freetype2
+
+%VERSION%
+2.11.0-6
+
+%BASE%
+freetype2
+
+%DESC%
+a freely available software library to render fonts
+
+%URL%
+https://www.freetype.org/
+
+%ARCH%
+mips
+
+%BUILDDATE%
+1743510545
+
+%INSTALLDATE%
+1743529504
+
+%PACKAGER%
+Unknown Packager
+
+%SIZE%
+1825208
+
+%GROUPS%
+pspdev-default
+
+%LICENSE%
+FTL OR GPL-2.0-or-later
+
+%VALIDATION%
+sha256
+
+%DEPENDS%
+zlib
+bzip2
+libpng
+

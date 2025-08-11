@@ -1,0 +1,14 @@
+%FILES%
+psp/
+psp/include/
+psp/include/SDL/
+psp/include/SDL/SDL_net.h
+psp/lib/
+psp/lib/libSDL_net.a
+psp/lib/pkgconfig/
+psp/lib/pkgconfig/SDL_net.pc
+psp/share/
+psp/share/licenses/
+psp/share/licenses/sdl-net/
+psp/share/licenses/sdl-net/COPYING
+

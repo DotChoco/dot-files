@@ -1,0 +1,16 @@
+%FILES%
+psp/
+psp/include/
+psp/include/tremor/
+psp/include/tremor/config_types.h
+psp/include/tremor/ivorbiscodec.h
+psp/include/tremor/ivorbisfile.h
+psp/lib/
+psp/lib/libvorbisidec.a
+psp/lib/pkgconfig/
+psp/lib/pkgconfig/vorbisidec.pc
+psp/share/
+psp/share/licenses/
+psp/share/licenses/tremor/
+psp/share/licenses/tremor/COPYING
+
