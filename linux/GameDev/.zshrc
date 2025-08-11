@@ -1,4 +1,4 @@
-tmux attach -t 0
+# tmux attach -t 0
 # clear
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -134,7 +134,6 @@ alias ls='exa -l'
 alias lg=/snap/bin/lazygit
 alias cb='cd build && make -j$(nproc) && ..'
 alias mx='tmux attach -t 0'
-# alias ppw="powershell.exe -NoExit -Command \"cd 'D:\Github\'\""
 alias ppw='pwsh.exe'
 
 . "$HOME/.cargo/env"
