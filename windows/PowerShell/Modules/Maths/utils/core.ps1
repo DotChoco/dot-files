@@ -2,6 +2,22 @@
 ##Set scale
 function scale{
   param([object[]]$Scale)
+  $value = [double]$Scale[0]
+  $decimals = [int]$Scale[1] # Number of decimal places you want
+
+  # Build the format string dynamically based on $decimals
+  $formatString = "{0:F$decimals}"
+
+  # Format the value with the specified number of decimal places
+  $formattedValue = $formatString -f $value
+
+  return $formattedValue
+}
+
+
+##Round
+function roundn{
+  param([object[]]$Scale)
   return [Math]::Round([double]$Scale[0], [int]$Scale[1])
 }
 

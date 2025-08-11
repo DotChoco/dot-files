@@ -1,3 +1,4 @@
+## Calculate the Aguinaldo
 function Aguinaldo{
   param([object[]]$Data)
   $SBD = [double]$Data[0]
@@ -15,7 +16,7 @@ function ISR{
   param([object[]]$Data)
   [decimal]$SueldoDiario= $Data[0]
   [int]$Periodicidad=if([int]$Data[1] -lt 1){ 0 } else{ [int]$Data[1] }
-  [int]$Decimals=if([int]$Data[2] -lt 1 -and [int]$Data[2] -gt 6 ){ 2 } else{ [int]$Data[2] }
+  [int]$Decimals=if([int]$Data[2] -gt 6 ){ 2 } else{ [int]$Data[2] }
 
  $mapa = @{
     1 = "bim.csv"
@@ -28,8 +29,6 @@ function ISR{
 
   # Set the value from the map if exists, else set the default value "dia.csv"
   $file = if ($mapa.ContainsKey($Periodicidad)) { "isr_" + $mapa[$Periodicidad] } else { "isr_dia.csv" }
-
-
   $data = Import-Csv -Path "$PWSDIR/Modules/Contability/docs/$file" -Delimiter ','
 
   foreach ($row in $data) {
@@ -41,10 +40,32 @@ function ISR{
 
     if ($SueldoDiario -ge $limInf -and $SueldoDiario -le $limSup) {
       $impuesto = (($SueldoDiario - $limInf) * $tasa) + $cuota
-      return (scale $impuesto,2)
+      return (scale $impuesto,$Decimals)
     }
-
   }
-
 }
+
+## Calculate the Subsidio Causado
+function ssb{
+  param([object[]]$Data)
+
+  [int]$DPG=if([int]$Data[0] -lt 1){ 1 } else{ [int]$Data[0] }
+  [int]$Decimals=if([int]$Data[1] -gt 6 ){ 3 } else{ [int]$Data[1] }
+
+  $DP=30.4
+  $UMA=3439.46
+  $SMP=10171
+  $PERC=0.1380
+
+  $RES = ( $UMA * $PERC/ $DP) * $DPG
+
+  return (scale $RES,$Decimals)
+}
+
+
+
+
+
+
+
 
