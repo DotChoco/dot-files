@@ -1,6 +1,6 @@
 -- vim.wo.number = true
--- vim.cmd('colorscheme retrobox')
 -- vim.opt.relativenumber = true
+
 local opt = vim.opt
 local opt_local = vim.opt_local
 local api = vim.api
@@ -14,7 +14,7 @@ require("mappings.genmap")
 require("mappings.lspmap")
 require("mappings.treemap")
 require("mappings.telemap")
--- require("mappings.buffermap")
+require("mappings.buffermap")
 
 -- Erease the search history
 opt.shada = ""
