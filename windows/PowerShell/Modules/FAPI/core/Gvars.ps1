@@ -1,11 +1,11 @@
 
 # Config file Auth Apps
-# $json = Get-Content -Path "$PSScriptRoot/conf.json" -Raw | ConvertFrom-Json
+$json = Get-Content -Path "$PSScriptRoot/conf.json" -Raw | ConvertFrom-Json
 
-$ATOK = "3325967053c3101174bd0267d9c36e06"
-$RTOK = "3325967053c3101174bd0267d9c36e06"
-$CID  = "3325967053c3101174bd0267d9c36e06"
-$CSIC = "3325967053c3101174bd0267d9c36e06"
+$CID  = $json.cid
+$CSIC = $json.csic
+$ATOK = $json.atok
+$RTOK = $json.rtok
 
 
 
