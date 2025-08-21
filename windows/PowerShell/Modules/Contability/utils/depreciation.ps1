@@ -1,6 +1,6 @@
 # Linear
 function dpl{
-
+  param([object[]]$Data)
 
 
 }
@@ -8,6 +8,7 @@ function dpl{
 
 # Sum of the Years' Digits(SYD)
 function dpd{
+  param([object[]]$Data)
 
 
 
@@ -16,6 +17,7 @@ function dpd{
 
 # Declining Balance
 function dpb{
+  param([object[]]$Data)
 
 
 
@@ -24,7 +26,7 @@ function dpb{
 
 # Units Produced
 function dpp{
-
+  param([object[]]$Data)
 
 
 }
