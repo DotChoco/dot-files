@@ -1,13 +1,14 @@
-# Contability/Contability.psm1
+# FAPI/FAPI.psm1
 
 # Private Variable (doesn't export)
-$BasePath = Join-Path $PSScriptRoot 'utils'
+$BasePath = $PSScriptRoot
 
-# Dot‑source all in "utils"
-Get-ChildItem -Path $BasePath -Filter '*.ps1' | ForEach-Object {
+# Dot‑source all subfolders
+Get-ChildItem -Path $BasePath -Recurse -Filter '*.ps1' -File | ForEach-Object {
     . $_.FullName
 }
 
 # Export ALL (You can filter from Function, Alias, Variable, Cmdlet)
 Export-ModuleMember -Function * -Alias * -Variable *
+
 

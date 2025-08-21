@@ -22,7 +22,8 @@ Import-Module System -Force
 Import-Module Styles -Force
 Import-Module Maths -Force
 Import-Module Contability -Force
-Import-Module Testing -Force
+# Import-Module Testing -Force
+Import-Module FAPI -Force
 
 Remove-Variable BasePath -ErrorAction SilentlyContinue
 
