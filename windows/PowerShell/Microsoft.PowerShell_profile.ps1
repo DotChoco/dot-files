@@ -1,13 +1,20 @@
 #Turn on the dropdown with the similar recent commands
 Set-PSReadLineOption -PredictionViewStyle ListView
 
-# Global Variables
-$HOMEDIR = "E:/../"
-$PWSDIR = "$HOMEDIR/Documents/PowerShell"
-$DEVDIR = "D:/../"
+
+# Config file
+$json = Get-Content -Path "$PSScriptRoot/conf.json" -Raw | ConvertFrom-Json
+
+# Global Mutables Variables
+$HOMEDIR = $json.homedir
+$DEVDIR = $json.devdir
+
+# Global Inmutables Variables
+$PWSDIR = "$HOME/Documents/PowerShell"
 $VIDIR = "$env:LOCALAPPDATA/nvim"
 $DFDIR = "$DEVDIR/dot-files"
-$CONTADIR="$PWSDIR/Modules/Contability"
+$CONTADIR = "$PWSDIR/Modules/Contability"
+$FAPI = "$PWSDIR/Modules/FAPI"
 
 
 # Imports
