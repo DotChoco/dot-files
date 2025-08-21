@@ -36,6 +36,19 @@ function fcm {
   gta && gtm $comment && gtp
 }
 
+##Git Include
+function gti {
+  param([object[]]$files)
+  git update-index --no-assume-unchange $files
+}
+
+##Git Exclude
+function gte {
+  param([object[]]$files)
+  git update-index --assume-unchanged $files
+}
+
+
 function gts { git status }
 function gtp { git push }
 function gtpl { git pull }
