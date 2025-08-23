@@ -1,6 +1,6 @@
 $SAUTH = "" #Server Auth
-$ANAME = "" #Client ID
-$ADESC = "" #Client ID
+$ANAME = "" #Auth Name
+$ADESC = "" #Auth Description
 $CID   = "" #Client ID
 $CSEC  = "" #Client Secret
 $ATOK  = "" #Access Token
@@ -8,6 +8,7 @@ $RTOK  = "" #Refresh Token
 
 function SelectAuth{
   param([int]$index)
+
   # Config file Auth Apps
   $Auths = Get-Content -Path "$PSScriptRoot/conf.json" -Raw | ConvertFrom-Json
 
@@ -42,6 +43,7 @@ function PrintAuths{
     Write-Host "Client ID:" $AuthsFiltered[$i].cid
     Write-Host "Client Secret:" $AuthsFiltered[$i].csec
   }
+
   Write-Host "-----------------"
 
 }
