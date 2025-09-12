@@ -48,6 +48,12 @@ function gte {
   git update-index --assume-unchanged $files
 }
 
+##Git Restore
+function gtr {
+  param([object[]]$files)
+  git restore $files
+}
+
 
 function gts { git status }
 function gtp { git push }
