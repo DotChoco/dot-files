@@ -9,9 +9,9 @@ $json = Get-Content -Path "$PSScriptRoot/conf.json" -Raw | ConvertFrom-Json
 $HOMEDIR = $json.homedir
 $DEVDIR = $json.devdir
 $PWSDIR = $json.pwsdir
+$VIDIR = $json.vidir
 
 # Global Inmutables Variables
-$VIDIR = "$env:LOCALAPPDATA/nvim"
 $DFDIR = "$DEVDIR/dot-files"
 $CONTADIR = "$PWSDIR/Modules/Contability"
 $FAPI = "$PWSDIR/Modules/FAPI"
