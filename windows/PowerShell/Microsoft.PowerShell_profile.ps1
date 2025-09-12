@@ -7,15 +7,10 @@ $json = Get-Content -Path "$PSScriptRoot/conf.json" -Raw | ConvertFrom-Json
 
 # Global Mutables Variables
 $HOMEDIR = $json.homedir
-<<<<<<< HEAD
 $DEVDIR = $json.devdir
 $PWSDIR = $json.pwsdir
 $VIDIR = $json.vidir
-=======
-$DEVDIR  = $json.devdir
-$PWSDIR  = $json.pwsdir
-$VIDIR   = $json.vidir
->>>>>>> 5f55c4383f937e31cb9dcde091b774d4943a3952
+
 
 # Global Inmutables Variables
 $DFDIR = "$DEVDIR/dot-files"
