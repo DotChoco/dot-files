@@ -81,7 +81,6 @@ Write-Host "`t>> dotnet(any version)"
 # [---------- Ignore Files ----------]
 #
 git update-index --assume-unchanged .\shared\nvim\lazy-lock.json
-git update-index --assume-unchanged windows/PowerShell/conf.json
 
 
 

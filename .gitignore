@@ -1,1 +1,2 @@
-./shared/nvim/lazy-lock.json
+**/lazy-lock.json
+**/conf.json
