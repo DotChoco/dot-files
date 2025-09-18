@@ -49,7 +49,7 @@ function ISR{
 function ssb{
   param([object[]]$Data)
 
-  [int]$DPG=if([int]$Data[0] -lt 1){ 1 } else{ [int]$Data[0] }
+  [int]$DPG=if([int]$Data[0] -lt 1){ 1 } else{ [int]$Data[0] } #Dias pagados
   [int]$Decimals=if([int]$Data[1] -gt 6 ){ 3 } else{ [int]$Data[1] }
 
   $DP=30.4
@@ -57,13 +57,10 @@ function ssb{
   $SMP=10171
   $PERC=0.1380
 
-  $RES = ( $UMA * $PERC/ $DP) * $DPG
+  $RES = ($UMA * $PERC/ $DP) * $DPG
 
   return (scale $RES,$Decimals)
 }
-
-
-
 
 
 

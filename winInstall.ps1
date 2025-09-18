@@ -3,13 +3,13 @@
 $REPODIR = Get-Location
 $SHARED = "$REPODIR/shared"
 $WIN = "$REPODIR/windows"
-# $HOMEDIR = "" #Own Home Directory
-$PSD_OLD = ""
+
 
 
 # [---------- Symbolic Directories ----------]
 #
 Write-Host "[---------- Symbolic Directories ----------]"
+
 # Powershell
 $PSD_OLD = Read-Host "Write the current PowerShell Path"
 rm $PSD_OLD -Force -Recurse
@@ -23,17 +23,20 @@ New-Item -ItemType Junction -Path "$env:LOCALAPPDATA/nvim" -Target "$SHARED/nvim
 if(Test-Path -Path "$env:APPDATA/alacritty/") { rm "$env:APPDATA/alacritty/" -Force -Recurse }
 New-Item -ItemType Junction -Path "$env:APPDATA/alacritty/" -Target "$WIN/alacritty/"
 
+Write-Host "`n`n`n`n"
+
 
 # [---------- Adding the NerdFont ----------]
 #
 Write-Host "[---------- NerdFonts Added ----------]"
 cp "$SHARED/Fonts/CaskaydiaCove/*" "C:/Windows/Fonts/"
 
+Write-Host "`n`n`n`n"
 
 
-# [---------- Conf.json ----------]
+# [---------- Config Directories ----------]
 #
-Write-Host "[---------- Work Directories ----------]"
+Write-Host "[---------- Config Directories ----------]"
 Write-Host ""
 $CONF = [PSCustomObject]@{
   homedir = Read-Host "Write the path that use like a Home Directory"
@@ -43,6 +46,10 @@ $CONF = [PSCustomObject]@{
 }
 ConvertTo-Json -Depth 2 $CONF | Out-File "$WIN/PowerShell/conf.json" -Encoding utf8
 
+Write-Host "`n`n`n`n"
+
+
+
 # [---------- Dependencies ----------]
 #
 Write-Host "[---------- Dependencies ----------]"
@@ -50,47 +57,106 @@ Write-Host "[---------- Dependencies ----------]"
 Write-Host ""
 Write-Host "List: "
 
-Write-Host "`t>> scoop"
-Write-Host "`t>> chocolatey"
-
-Write-Host "`t>> git"
-Write-Host "`t>> nvim"
-Write-Host "`t>> eza"
-Write-Host "`t>> ripgrep"
-Write-Host "`t>> MSYS2"
-Write-Host "`t>> eza"
-
-
-Write-Host "`t>> rust"
-$url = "https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe"
-$output = "$env:USERPROFILE\Downloads\rustup-init.exe"
-Invoke-WebRequest -Uri $url -OutFile $output
-Start-Process $output -Wait
-
-
-Write-Host "`t>> golang(latest version)"
-./windows/goInstaller.ps1
-
-
-Write-Host "`t>> dotnet(any version)"
-[float]$DN_Version = Read-Host "Write the dotnet version(e.g. 8.0)"
-./windows/dotnetInstaller.ps1 -Channel $DN_Version
+Write-Host "  >> Scoop"
+Write-Host "  >> chocolatey"
+Write-Host "  >> git"
+Write-Host "  >> nodejs"
+Write-Host "  >> nvim"
+Write-Host "  >> eza"
+Write-Host "  >> ripgrep"
+Write-Host "  >> MSYS2"
 
 
 
-# [---------- Ignore Files ----------]
+$Git = Read-Host "Do you want install git(y/n)?"
+if($Git.ToLower() -eq "y"){
+  winget install --id Git.Git -e --source winget
+}
+
+
+$Scoop = Read-Host "Do you want install scoop(y/n)?"
+if($Scoop.ToLower() -eq "y" -or $Scoop -eq ""){
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+  Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+}
+
+
+$Chocolatey = Read-Host "Do you want install chocolatey(y/n)?"
+if($Chocolatey.ToLower() -eq "y"){
+  powershell -c "irm https://community.chocolatey.org/install.ps1|iex"
+}
+
+
+$NodeJs = Read-Host "Do you want install nodeJs(y/n)?"
+if($NodeJs.ToLower() -eq "y"){
+  choco install nodejs-lts
+}
+
+
+$Nvim = Read-Host "Do you want install neovim(y/n)?"
+if($Nvim.ToLower() -eq "y"){
+  winget install Neovim.Neovim
+}
+
+
+$Eza = Read-Host "Do you want install eza(y/n)?"
+if($Eza.ToLower() -eq "y"){
+  scoop install eza
+}
+
+
+$ripgrep = Read-Host "Do you want install ripgrep(y/n)?"
+if($ripgrep.ToLower() -eq "y"){
+  choco install ripgrep
+}
+
+
+$MSYS2 = Read-Host "Do you want install MSYS2(y/n)?"
+if($MSYS2.ToLower() -eq "y"){
+  winget install MSYS2.MSYS2
+}
+
+Write-Host "`n`n`n`n"
+
+
+
+# [---------- Dependencies ----------]
 #
-git update-index --assume-unchanged .\shared\nvim\lazy-lock.json
+Write-Host "[---------- Languajes ----------]"
+$Rust = Read-Host "Do you want install Rust(y/n)?"
+if($Rust.ToLower() -eq "y"){
+  $url = "https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe"
+  $output = "$env:USERPROFILE\Downloads\rustup-init.exe"
+  Invoke-WebRequest -Uri $url -OutFile $output
+  Start-Process $output -Wait
+}
 
 
 
-# [---------- Remove Temp Variables ----------]
-#
-Remove-Variable WIN -ErrorAction SilentlyContinue
-Remove-Variable SHARED -ErrorAction SilentlyContinue
-Remove-Variable REPODIR -ErrorAction SilentlyContinue
-Remove-Variable CONF -ErrorAction SilentlyContinue
+$Go = Read-Host "Do you want install Golang(y/n)?"
+if($Go.ToLower() -eq "y"){
+  # Write-Host "`t>> golang(latest version)"
+  ./windows/goInstaller.ps1
+}
 
 
+$CSharp = Read-Host "Do you want install CSharp(y/n)?"
+if($CSharp.ToLower() -eq "y"){
+  Write-Host "`t>> dotnet(any version)"
+  [float]$DN_Version = Read-Host "Write the dotnet version(e.g. 8.0)"
+  ./windows/dotnetInstaller.ps1 -Channel $DN_Version
+}
+
+Write-Host "`n`n`n`n"
+
+
+# [---------- Restart Windows Terminal ----------]
+Write-Host "You need restart your terminal to apply the changes."
+$Restart = Read-Host "Do you want restart it now?"
+
+if($Restart.ToLower() -eq "y"){
+  Start-Process wt
+  Stop-Process -Id (Get-Process -Id $PID).Parent.Id
+}
 
 
