@@ -140,12 +140,12 @@ if($Rust.ToLower() -eq "y"){
 # }
 
 
-$CSharp = Read-Host "Do you want install CSharp(y/n)?"
-if($CSharp.ToLower() -eq "y"){
-  Write-Host "`t>> dotnet(any version)"
-  [float]$DN_Version = Read-Host "Write the dotnet version(e.g. 8.0)"
-  ./windows/dotnetInstaller.ps1 -Channel $DN_Version
-}
+# $CSharp = Read-Host "Do you want install CSharp(y/n)?"
+# if($CSharp.ToLower() -eq "y"){
+#   Write-Host "`t>> dotnet(any version)"
+#   [float]$DN_Version = Read-Host "Write the dotnet version(e.g. 8.0)"
+#   ./windows/dotnetInstaller.ps1 -Channel $DN_Version
+# }
 
 Write-Host "`n`n`n`n"
 
