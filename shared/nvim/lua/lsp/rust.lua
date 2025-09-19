@@ -1,4 +1,3 @@
-local lspconfig = require("lspconfig")
 local M = require("lsp.utils")
 
 local capabilities, on_attach = M.get_common()
@@ -7,7 +6,7 @@ local bin_path = M.get_bin_path()
 local util = require ('lspconfig').util
 
 
-lspconfig.rust_analyzer.setup({
+vim.lsp.config("lua_ls", {
   capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { "rust" },
@@ -21,5 +20,4 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
-
 

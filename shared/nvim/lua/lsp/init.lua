@@ -9,44 +9,18 @@ vim.diagnostic.config({
 -- Load each configuration of LSP
 require("lsp.csharp")
 require("lsp.lua_lsp")
-require("lsp.rust")
-require("lsp.go")
+require("lsp.pws")
+-- require("lsp.rust")
+-- require("lsp.go")
 -- require("lsp.clang")
 -- require("lsp.cmake")
 -- require("lsp.ts")
 
 
+-- Start each LSP
+vim.lsp.enable("csharp_ls")
+vim.lsp.enable("powershell_es")
+-- lua print(vim.inspect(vim.lsp.get_clients()))
 
 
--- local diagnostic = vim.diagnostic
--- local bin_ext
---
--- function get_bin_path()
---   if linux == true then
---     bin_ext = ""
---   end
---   bin_ext = ".cmd"
---   return vim.fn.stdpath("data") .. "\\mason\\bin\\"
--- end
---
--- local linux = true
--- local bin_path = get_bin_path()
---
--- local lspconfig = require("lspconfig")
--- local blink_cmp = require("blink.cmp")
---
--- local util = require ('lspconfig').util
--- local capabilities = blink_cmp.get_lsp_capabilities()
--- local function on_attach(client, bufnr)
--- end
---
--- -- Diagnostics config
--- diagnostic.config(
---   {
---     underline = true,
---     virtual_text = false,
---     severity_sort = true,
---     signs = false,
---   }
--- )
---
+

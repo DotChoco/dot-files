@@ -1,17 +1,14 @@
-local lspconfig = require("lspconfig")
-
-lspconfig.powershell_es.setup ({
-  bundle_path = vim.fn.stdpath("data") .. "/PWSB",
-  --[[ cmd = {'pwsh', '-NoLogo', '-NoProfile', '-Command', bundle_path .. "PowerShellEditorServices/Start-EditorServices.ps1 ..."}, ]]
-  -- shell = 'powershell.exe',
- })
+vim.lsp.config("powershell_es",{
+  bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services",
+})
 
 
- ---@type vim.lsp.Config
+---@type vim.lsp.Config
 return {
   cmd = function(dispatchers)
     local temp_path = vim.fn.stdpath('cache')
     local bundle_path = vim.lsp.config.powershell_es.bundle_path
+
     local shell = vim.lsp.config.powershell_es.shell or 'pwsh'
 
     local command_fmt =
@@ -24,7 +21,3 @@ return {
   filetypes = { 'ps1' },
   root_markers = { 'PSScriptAnalyzerSettings.psd1', '.git' },
 }
-
-
-
-

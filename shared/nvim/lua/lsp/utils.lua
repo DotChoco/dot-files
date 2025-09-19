@@ -14,6 +14,13 @@ function M.get_bin_path()
   return vim.fn.stdpath("data") .. "/mason/bin/"
 end
 
+-- Get base path of binary installed from mason
+function M.get_nvim_data()
+  return vim.fn.stdpath("data")
+end
+
+
+
 -- Capabilities and on_attach
 function M.get_common()
   local blink_cmp = require("blink.cmp")

@@ -1,4 +1,3 @@
-local lspconfig = require("lspconfig")
 local M = require("lsp.utils")
 
 local bin_ext = M.get_bin_ext()
@@ -8,8 +7,7 @@ local capabilities = blink_cmp.get_lsp_capabilities()
 local function on_attach(client, bufnr)
 end
 
-
-lspconfig.clangd.setup({
+vim.lsp.config("clangd", {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.server_capabilities.signatureHelpProvider = false
