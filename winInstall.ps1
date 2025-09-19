@@ -133,11 +133,11 @@ if($Rust.ToLower() -eq "y"){
 
 
 
-$Go = Read-Host "Do you want install Golang(y/n)?"
-if($Go.ToLower() -eq "y"){
-  # Write-Host "`t>> golang(latest version)"
-  ./windows/goInstaller.ps1
-}
+# $Go = Read-Host "Do you want install Golang(y/n)?"
+# if($Go.ToLower() -eq "y"){
+#   # Write-Host "`t>> golang(latest version)"
+#   ./windows/goInstaller.ps1
+# }
 
 
 $CSharp = Read-Host "Do you want install CSharp(y/n)?"
