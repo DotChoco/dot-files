@@ -42,7 +42,22 @@ function gt {
 }
 
 
+function Module_N {
+  param([object[]]$Values)
+  $mod = [float]$Values[0]
+  $n = [float]$Values[1]
+  return $mod%$n
+}
+
+
+
+
+
+
+
+
 #Alias
 Set-Alias scl scale
+Set-Alias mod Module_N
 
 
