@@ -54,9 +54,17 @@ function gtr {
   git restore $files
 }
 
+##Git Branch Switch
+function gbs{
+  param([string]$branch)
+  git checkout $branch
+}
 
-function gts { git status }
-function gtp { git push }
-function gtpl { git pull }
+
+##Line Functions
+function glb { git branch -a } ##Git List Branches
+function gts { git status } ##Git Status
+function gtp { git push } ##Git Push
+function gtpl { git pull } ##Git Pull
 
 
