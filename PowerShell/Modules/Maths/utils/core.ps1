@@ -32,7 +32,7 @@ function pow {
 }
 
 #Greater Than
-function gt {
+function Greater_Than {
   param([object[]]$Values)
   [double]$Value_Greater = $Values[0]
   [double]$Comparer = $Values[1]
@@ -59,5 +59,6 @@ function Module_N {
 #Alias
 Set-Alias scl scale
 Set-Alias mod Module_N
+Set-Alias gt Greater_Than
 
 
