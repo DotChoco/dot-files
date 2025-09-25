@@ -54,8 +54,8 @@ function gtr {
   git restore $files
 }
 
-##Git Branch Switch
-function gbs{
+##Git Switch Branch
+function gsb{
   param([string]$branch)
   git checkout $branch
 }
