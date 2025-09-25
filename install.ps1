@@ -1,10 +1,3 @@
-# [---------- Temp Variables ----------]
-#
-$REPODIR = Get-Location
-$SHARED = "$REPODIR/shared"
-$WIN = "$REPODIR/windows"
-
-
 
 # [---------- Symbolic Directories ----------]
 #
@@ -12,26 +5,23 @@ Write-Host "[---------- Symbolic Directories ----------]"
 
 # Powershell
 $PSD_OLD = Read-Host "Write the current PowerShell Path"
-rm $PSD_OLD -Force -Recurse
-New-Item -ItemType Junction -Path $PSD_OLD -Target "$WIN/PowerShell/"
+Remove-Item $PSD_OLD -Force -Recurse
+New-Item -ItemType Junction -Path $PSD_OLD -Target "$(Get-Location)/PowerShell/"
+
+#Windows Terminal
+Remove-Item cd "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/"
+New-Item -ItemType Junction -Path $PSD_OLD -Target "$(Get-Location)/LocalState/"
 
 # Nvim
-if(Test-Path -Path "$env:LOCALAPPDATA/nvim/") { rm "$env:LOCALAPPDATA/nvim/" -Force -Recurse }
-New-Item -ItemType Junction -Path "$env:LOCALAPPDATA/nvim" -Target "$SHARED/nvim/"
+if(Test-Path -Path "$env:LOCALAPPDATA/nvim/") { Remove-Item "$env:LOCALAPPDATA/nvim/" -Force -Recurse }
+New-Item -ItemType Junction -Path "$env:LOCALAPPDATA/nvim" -Target "$(Get-Location)/nvim/"
 
 # Alacritty
-if(Test-Path -Path "$env:APPDATA/alacritty/") { rm "$env:APPDATA/alacritty/" -Force -Recurse }
+if(Test-Path -Path "$env:APPDATA/alacritty/") { Remove-Item "$env:APPDATA/alacritty/" -Force -Recurse }
 New-Item -ItemType Junction -Path "$env:APPDATA/alacritty/" -Target "$WIN/alacritty/"
 
 Write-Host "`n`n`n`n"
 
-
-# [---------- Adding the NerdFont ----------]
-#
-Write-Host "[---------- NerdFonts Added ----------]"
-cp "$SHARED/Fonts/CaskaydiaCove/*" "C:/Windows/Fonts/"
-
-Write-Host "`n`n`n`n"
 
 
 # [---------- Config Directories ----------]
@@ -120,6 +110,18 @@ Write-Host "`n`n`n`n"
 
 
 
+
+# [---------- Adding the NerdFont ----------]
+#
+Write-Host "[---------- NerdFonts Added ----------]"
+scoop bucket add nerd-fonts
+scoop install CascadiaCode-NF
+
+Write-Host "`n`n`n`n"
+
+
+
+
 # [---------- Dependencies ----------]
 #
 Write-Host "[---------- Languajes ----------]"
@@ -132,11 +134,10 @@ if($Rust.ToLower() -eq "y"){
 }
 
 
-
 # $Go = Read-Host "Do you want install Golang(y/n)?"
 # if($Go.ToLower() -eq "y"){
 #   # Write-Host "`t>> golang(latest version)"
-#   ./windows/goInstaller.ps1
+#   ./installers/goInstaller.ps1
 # }
 
 
@@ -144,10 +145,11 @@ if($Rust.ToLower() -eq "y"){
 # if($CSharp.ToLower() -eq "y"){
 #   Write-Host "`t>> dotnet(any version)"
 #   [float]$DN_Version = Read-Host "Write the dotnet version(e.g. 8.0)"
-#   ./windows/dotnetInstaller.ps1 -Channel $DN_Version
+#   ./installers/dotnetInstaller.ps1 -Channel $DN_Version
 # }
 
 Write-Host "`n`n`n`n"
+
 
 
 # [---------- Restart Windows Terminal ----------]
