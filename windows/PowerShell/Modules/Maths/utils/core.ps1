@@ -46,7 +46,7 @@ function Module_N {
   param([object[]]$Values)
   $mod = [float]$Values[0]
   $n = [float]$Values[1]
-  return $mod%$n
+  return $n%$mod
 }
 
 
