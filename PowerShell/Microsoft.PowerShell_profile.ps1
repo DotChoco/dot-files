@@ -3,7 +3,7 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 
 
 # Config file
-$json = Get-Content -Path "$PSScriptRoot/conf.json" -Raw | ConvertFrom-Json
+$json = Get-Content -Path "$env:LOCALAPPDATA/Powershell/conf.json" -Raw | ConvertFrom-Json
 
 # Global Mutables Variables
 $HOMEDIR = $json.homedir

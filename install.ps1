@@ -31,10 +31,10 @@ Write-Host ""
 $CONF = [PSCustomObject]@{
   homedir = Read-Host "Write the path that use like a Home Directory"
   devdir  = Read-Host "Write the path that use like a Dev Directory"
-  pwsdir  = "$WIN/PowerShell/"
+  pwsdir  = "$(Get-Location)/PowerShell/"
   vidir   = "$env:LOCALAPPDATA/nvim"
 }
-ConvertTo-Json -Depth 2 $CONF | Out-File "$WIN/PowerShell/conf.json" -Encoding utf8
+ConvertTo-Json -Depth 2 $CONF | Out-File "$env:LOCALAPPDATA/PowerShell/conf.json" -Encoding utf8
 
 Write-Host "`n`n`n`n"
 
