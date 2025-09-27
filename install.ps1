@@ -8,17 +8,13 @@ $PSD_OLD = Read-Host "Write the current PowerShell Path"
 Remove-Item $PSD_OLD -Force -Recurse
 New-Item -ItemType Junction -Path $PSD_OLD -Target "$(Get-Location)/PowerShell/"
 
-#Windows Terminal
-Remove-Item cd "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/"
-New-Item -ItemType Junction -Path $PSD_OLD -Target "$(Get-Location)/LocalState/"
-
 # Nvim
 if(Test-Path -Path "$env:LOCALAPPDATA/nvim/") { Remove-Item "$env:LOCALAPPDATA/nvim/" -Force -Recurse }
 New-Item -ItemType Junction -Path "$env:LOCALAPPDATA/nvim" -Target "$(Get-Location)/nvim/"
 
 # Alacritty
 if(Test-Path -Path "$env:APPDATA/alacritty/") { Remove-Item "$env:APPDATA/alacritty/" -Force -Recurse }
-New-Item -ItemType Junction -Path "$env:APPDATA/alacritty/" -Target "$WIN/alacritty/"
+New-Item -ItemType Junction -Path "$env:APPDATA/alacritty/" -Target "$(Get-Location)/alacritty/"
 
 Write-Host "`n`n`n`n"
 
@@ -43,10 +39,9 @@ Write-Host "`n`n`n`n"
 # [---------- Dependencies ----------]
 #
 Write-Host "[---------- Dependencies ----------]"
-
 Write-Host ""
-Write-Host "List: "
 
+Write-Host "List: "
 Write-Host "  >> Scoop"
 Write-Host "  >> chocolatey"
 Write-Host "  >> git"
@@ -122,7 +117,7 @@ Write-Host "`n`n`n`n"
 
 
 
-# [---------- Dependencies ----------]
+# [---------- Languajes ----------]
 #
 Write-Host "[---------- Languajes ----------]"
 $Rust = Read-Host "Do you want install Rust(y/n)?"

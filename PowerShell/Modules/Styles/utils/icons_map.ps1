@@ -68,7 +68,6 @@ $iconMap = & {
     ".xml" = $excel
     ".csv" = $excel
 
-
     # shell/script
     ".ps1" = $shell
     ".bat" = $shell
