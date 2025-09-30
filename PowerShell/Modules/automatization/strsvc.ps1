@@ -1,6 +1,7 @@
-function Initialize_STomcat {
+function Initialize_STomcat
+{
   param ([string]$serviceName)
-  
+
   $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
   if (-not $service)
   {

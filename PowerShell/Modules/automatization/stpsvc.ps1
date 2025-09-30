@@ -1,6 +1,7 @@
-function Stop_STomcat {
+function Stop_STomcat
+{
   param ([string]$serviceName)
-  
+
   $serviceName = "Tomcat9"
   $service = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
 

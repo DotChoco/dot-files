@@ -1,4 +1,5 @@
-function R_PacProperties {
+function R_PacProperties
+{
   param(
     [string]$file,
     [string]$target,

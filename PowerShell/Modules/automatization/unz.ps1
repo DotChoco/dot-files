@@ -1,4 +1,5 @@
-function UZCompilation {
+function UZCompilation
+{
   param(
     [string]$Origin,
     [string]$Destination

@@ -1,4 +1,5 @@
-function Make {
+function Make_Path
+{
   param([string]$basePath)
   # Obtener la fecha de hoy en formato YYYY-MM-DD
   $today = Get-Date -Format "yyyyMMdd"
@@ -18,11 +19,12 @@ function Make {
 
 }
 
-function Move_JAR{
+function Move_JAR
+{
   param(
     [string]$Origin,
     [string]$Destination
   )
   $JFile = Get-ChildItem -Path $Origin -Filter "*.jar" | Select-Object -ExpandProperty FullName
-  Move-Item $JFile $Destination 
+  Move-Item $JFile $Destination
 }

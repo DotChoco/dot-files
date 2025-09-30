@@ -5,6 +5,7 @@ $JarPath = "C:\Tomcat 7.0\webapps\ROOT\WEB-INF\lib" #Jar Path
 $ZPath   = "C:\Tomcat 7.0\webapps\ROOT" #Zip Path
 $FPath   = "C:\Users\Administrator\Documents\updates" #Files Path
 $CPath   = $PSScriptRoot #Current Path
+$script:NFPath  = ""
 
 # Service Name
 $SVC = "Tomcat9"
@@ -17,31 +18,37 @@ $SVC = "Tomcat9"
 . "$CPath/unz.ps1"
 
 
-function Update_Prod {    
-    # Crear Carpeta
-    $UZPath = Make_Path -basePath $FPath
+# Crear Carpeta
+function Make_Today
+{
+  param([string]$Path)
+  $script:NFPath = Make_Path -basePath $Path
+}
 
-    # Modificar pac.properties
-    R_PacProperties -file $PacProp -target "SMARTER_WEB" -replacement "X"
 
-    # Detener Tomcat
-    Stop_STomcat -serviceName $SVC
+function Update_Prod
+{
+  # Modificar pac.properties
+  R_PacProperties -file $PacProp -target "SMARTER_WEB" -replacement "X"
 
-    # Borrar FactureApp
-    Remove-Item "$ZPath/FactureApp" -Force -Recurse
+  # Detener Tomcat
+  Stop_STomcat -serviceName $SVC
 
-    # Unzip Fichero
-    UZCompilation -Origin $FPath -Destination $ZPath
+  # Borrar FactureApp
+  Remove-Item "$ZPath/FactureApp" -Force -Recurse
 
-    # Move JAR
-    Move_JAR -Origin $FPath -Destination $JarPath
+  # Unzip Fichero
+  UZCompilation -Origin $FPath -Destination $ZPath
 
-    # Modificar pac.properties
-    R_PacProperties -file $PacProp -target "X" -replacement "SMARTER_WEB"
+  # Move JAR
+  Move_JAR -Origin $FPath -Destination $JarPath
 
-    # Iniciar Tomcat
-    Initialize_STomcat -serviceName $SVC
+  # Modificar pac.properties
+  R_PacProperties -file $PacProp -target "X" -replacement "SMARTER_WEB"
 
-    Write-Host "`n`nUpdate a productivo completo"
+  # Iniciar Tomcat
+  Initialize_STomcat -serviceName $SVC
+
+  Write-Host "`n`nUpdate a productivo completo"
 }
 
