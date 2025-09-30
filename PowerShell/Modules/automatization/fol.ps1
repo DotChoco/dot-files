@@ -14,11 +14,12 @@ function Make_Path
   {
     New-Item -Path $newFolder -ItemType Directory | Out-Null
     Write-Host "Carpeta creada: $newFolder"
+    return $newFolder
   } else
   {
     Write-Host "La carpeta ya existe: $newFolder"
   }
-  return $newFolder
+  return "null"
 }
 
 function Move_JAR

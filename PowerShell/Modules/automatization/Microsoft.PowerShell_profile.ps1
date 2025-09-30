@@ -5,7 +5,8 @@ $JarPath = "C:\Tomcat 7.0\webapps\ROOT\WEB-INF\lib" #Jar Path
 $ZPath   = "C:\Tomcat 7.0\webapps\ROOT" #Zip Path
 $FPath   = "C:\Users\Administrator\Documents\updates" #Files Path
 $CPath   = $PSScriptRoot #Current Path
-$script:NFPath  = ""
+
+$script:NFPath  = "" # NO MODIFICAR ESTA VARIABLE!!
 
 # Service Name
 $SVC = "Tomcat9"
@@ -22,7 +23,8 @@ $SVC = "Tomcat9"
 function Make_Today
 {
   param([string]$Path)
-  $script:NFPath = Make_Path -basePath $Path
+  $response = Make_Path -basePath $Path
+  if($response -ne "null"){ $script:NFPath = $response }
 }
 
 
