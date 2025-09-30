@@ -1,6 +1,9 @@
 function Make_Path
 {
   param([string]$basePath)
+
+  $basePath = [System.IO.Path]::GetFullPath((Join-Path (Get-Location) $basePath))
+  # if($basePath -eq "."){ $basePath = Get-Location }
   # Obtener la fecha de hoy en formato YYYY-MM-DD
   $today = Get-Date -Format "yyyyMMdd"
 
@@ -11,12 +14,12 @@ function Make_Path
   if (-not (Test-Path $newFolder))
   {
     New-Item -Path $newFolder -ItemType Directory | Out-Null
-    Write-Output "Carpeta creada: $newFolder"
+    Write-Host "Carpeta creada: $newFolder"
   } else
   {
-    Write-Output "La carpeta ya existe: $newFolder"
+    Write-Host "La carpeta ya existe: $newFolder"
   }
-
+  return $newFolder
 }
 
 function Move_JAR
