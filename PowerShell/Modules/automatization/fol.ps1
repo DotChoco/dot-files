@@ -1,9 +1,8 @@
 function Make_Path
 {
   param([string]$basePath)
-
   $basePath = [System.IO.Path]::GetFullPath((Join-Path (Get-Location) $basePath))
-  # if($basePath -eq "."){ $basePath = Get-Location }
+
   # Obtener la fecha de hoy en formato YYYY-MM-DD
   $today = Get-Date -Format "yyyyMMdd"
 
