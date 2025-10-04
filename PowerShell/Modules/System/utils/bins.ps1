@@ -35,3 +35,5 @@ function spd {
 }
 
 Set-Alias tre tree
+Set-Alias ob obsidian
+Set-Alias g git
